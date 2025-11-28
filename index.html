@@ -767,48 +767,85 @@ document.addEventListener("DOMContentLoaded", function() {
         const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
         const TG_CHAT_ID = "-1002935952114";
 
-        // Находим поля
+        // Находим элементы
         const phoneInput = popupForm.querySelector('input[type="tel"]') || popupForm.querySelector('input[name="Phone"]');
         const emailInput = popupForm.querySelector('input[name="Email"]');
         const checkbox = popupForm.querySelector('input[type="checkbox"]');
+        const checkboxLabel = checkbox ? checkbox.closest('label') || checkbox.parentNode : null;
 
-        // Маска
+        // Функция: Показать ошибку (рамка + текст)
+        function showError(input, message) {
+            if (!input) return;
+            input.style.border = '1px solid red';
+            
+            // Проверяем, есть ли уже текст ошибки
+            let errorDiv = input.parentNode.querySelector('.custom-error-msg');
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.className = 'custom-error-msg';
+                errorDiv.style.color = 'red';
+                errorDiv.style.fontSize = '12px';
+                errorDiv.style.marginTop = '5px';
+                input.parentNode.appendChild(errorDiv);
+            }
+            errorDiv.innerText = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // Функция: Убрать ошибку
+        function clearError(input) {
+            if (!input) return;
+            input.style.border = '1px solid #c9c9c9';
+            const errorDiv = input.parentNode.querySelector('.custom-error-msg');
+            if (errorDiv) errorDiv.style.display = 'none';
+        }
+
+        // Маска телефона
         if (typeof IMask !== 'undefined' && phoneInput) {
             IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
         }
 
+        // Ввод -> Убираем ошибку сразу
+        if(phoneInput) phoneInput.addEventListener('input', () => clearError(phoneInput));
+        if(emailInput) emailInput.addEventListener('input', () => clearError(emailInput));
+        if(checkbox) checkbox.addEventListener('change', () => {
+            if(checkboxLabel) checkboxLabel.style.color = ''; // Возвращаем цвет текста
+        });
+
         popupForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Сброс старых ошибок (делаем рамки серыми)
-            const allInputs = popupForm.querySelectorAll('input');
-            allInputs.forEach(inp => inp.style.border = '1px solid #c9c9c9');
-            
             let hasError = false;
 
-            // --- ВАЛИДАЦИЯ ---
-
-            // 1. Чекбокс
-            if (checkbox && !checkbox.checked) {
-                // Тут можно оставить алерт (он важен) или подсветить текст
-                alert('Пожалуйста, подтвердите согласие на обработку данных');
+            // 1. ТЕЛЕФОН
+            if (!phoneInput || phoneInput.value.length < 16) { // 16 символов с маской +7 (XXX)...
+                showError(phoneInput, 'Пожалуйста, введите корректный телефон');
                 hasError = true;
+            } else {
+                clearError(phoneInput);
             }
 
-            // 2. Телефон (Обязательно)
-            if (!phoneInput || phoneInput.value.length < 11) {
-                if(phoneInput) phoneInput.style.border = '1px solid red';
-                hasError = true;
-            }
-
-            // 3. Email (Обязательно)
+            // 2. EMAIL
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailInput || !emailRegex.test(emailInput.value)) {
-                if(emailInput) emailInput.style.border = '1px solid red';
+                showError(emailInput, 'Пожалуйста, введите корректный Email');
                 hasError = true;
+            } else {
+                clearError(emailInput);
             }
 
-            if (hasError) return; // Если есть ошибки — стоп
+            // 3. ЧЕКБОКС
+            if (checkbox && !checkbox.checked) {
+                if(checkboxLabel) {
+                    checkboxLabel.style.color = 'red'; // Красим текст "Я согласен..." в красный
+                    // Можно добавить тряску анимацией, но пока просто цвет
+                }
+                hasError = true;
+            } else {
+                if(checkboxLabel) checkboxLabel.style.color = ''; 
+            }
+
+            if (hasError) return; // Если есть ошибки - стоп
 
             // --- ОТПРАВКА ---
             const btn = popupForm.querySelector('button[type="submit"]');
@@ -819,12 +856,10 @@ document.addEventListener("DOMContentLoaded", function() {
             const phone = phoneInput.value;
             const email = emailInput.value;
             
-            // Ищем поле "Время"
             let extraInfo = '';
             const timeInput = popupForm.querySelector('input[name*="время"]');
             if (timeInput) extraInfo = timeInput.value;
 
-            // Собираем чекбоксы мессенджеров (если есть)
             const messenger = popupForm.querySelector('input[name="messenger-type"]:checked')?.value || '-';
 
             const text = `<b>🔔 Заявка из ПОПАПА!</b>\n` +
@@ -848,10 +883,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 btn.innerText = originalText;
             });
         });
-        
-        // Убираем красную рамку при вводе
-        if(phoneInput) phoneInput.addEventListener('input', () => phoneInput.style.border = '1px solid #c9c9c9');
-        if(emailInput) emailInput.addEventListener('input', () => emailInput.style.border = '1px solid #c9c9c9');
     }
 });
 </script>
