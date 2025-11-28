@@ -767,107 +767,48 @@ document.addEventListener("DOMContentLoaded", function() {
         const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
         const TG_CHAT_ID = "-1002935952114";
 
-        // Находим элементы
+        // Маска (оставляем, она не мешает)
         const phoneInput = popupForm.querySelector('input[type="tel"]') || popupForm.querySelector('input[name="Phone"]');
-        const emailInput = popupForm.querySelector('input[name="Email"]');
-        const checkbox = popupForm.querySelector('input[type="checkbox"]');
-        const checkboxLabel = checkbox ? checkbox.closest('label') || checkbox.parentNode : null;
-
-        // Функция: Показать ошибку (рамка + текст)
-        function showError(input, message) {
-            if (!input) return;
-            input.style.border = '1px solid red';
-            
-            // Проверяем, есть ли уже текст ошибки
-            let errorDiv = input.parentNode.querySelector('.custom-error-msg');
-            if (!errorDiv) {
-                errorDiv = document.createElement('div');
-                errorDiv.className = 'custom-error-msg';
-                errorDiv.style.color = 'red';
-                errorDiv.style.fontSize = '12px';
-                errorDiv.style.marginTop = '5px';
-                input.parentNode.appendChild(errorDiv);
-            }
-            errorDiv.innerText = message;
-            errorDiv.style.display = 'block';
-        }
-
-        // Функция: Убрать ошибку
-        function clearError(input) {
-            if (!input) return;
-            input.style.border = '1px solid #c9c9c9';
-            const errorDiv = input.parentNode.querySelector('.custom-error-msg');
-            if (errorDiv) errorDiv.style.display = 'none';
-        }
-
-        // Маска телефона
         if (typeof IMask !== 'undefined' && phoneInput) {
             IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
         }
 
-        // Ввод -> Убираем ошибку сразу
-        if(phoneInput) phoneInput.addEventListener('input', () => clearError(phoneInput));
-        if(emailInput) emailInput.addEventListener('input', () => clearError(emailInput));
-        if(checkbox) checkbox.addEventListener('change', () => {
-            if(checkboxLabel) checkboxLabel.style.color = ''; // Возвращаем цвет текста
-        });
+        // Кнопка отправки
+        const btn = popupForm.querySelector('button[type="submit"]');
 
-        popupForm.addEventListener('submit', function(e) {
+        // Обработчик клика (вместо submit)
+        btn.addEventListener('click', function(e) {
+            // 1. ПРОВЕРКА ВАЛИДНОСТИ БРАУЗЕРОМ
+            // checkValidity() вызовет стандартные браузерные подсказки ("Заполните это поле")
+            // и подсветит поля, если у них стоит атрибут required
+            if (!popupForm.checkValidity()) {
+                // Если форма не валидна, мы ничего не делаем. 
+                // Браузер сам покажет ошибки.
+                return; 
+            }
+
+            // 2. Если всё ОК -> Отменяем стандартную отправку и шлем в ТГ
             e.preventDefault();
             
-            let hasError = false;
-
-            // 1. ТЕЛЕФОН
-            if (!phoneInput || phoneInput.value.length < 16) { // 16 символов с маской +7 (XXX)...
-                showError(phoneInput, 'Пожалуйста, введите корректный телефон');
-                hasError = true;
-            } else {
-                clearError(phoneInput);
-            }
-
-            // 2. EMAIL
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailInput || !emailRegex.test(emailInput.value)) {
-                showError(emailInput, 'Пожалуйста, введите корректный Email');
-                hasError = true;
-            } else {
-                clearError(emailInput);
-            }
-
-            // 3. ЧЕКБОКС
-            if (checkbox && !checkbox.checked) {
-                if(checkboxLabel) {
-                    checkboxLabel.style.color = 'red'; // Красим текст "Я согласен..." в красный
-                    // Можно добавить тряску анимацией, но пока просто цвет
-                }
-                hasError = true;
-            } else {
-                if(checkboxLabel) checkboxLabel.style.color = ''; 
-            }
-
-            if (hasError) return; // Если есть ошибки - стоп
-
-            // --- ОТПРАВКА ---
-            const btn = popupForm.querySelector('button[type="submit"]');
             const originalText = btn.innerText;
             btn.innerText = 'Отправка...';
 
-            const name = popupForm.querySelector('input[name="Name"]')?.value || 'Не указано';
-            const phone = phoneInput.value;
-            const email = emailInput.value;
+            // Сбор данных
+            const name = popupForm.querySelector('input[name="Name"]')?.value || '-';
+            const email = popupForm.querySelector('input[name="Email"]')?.value || '-';
+            const phone = phoneInput ? phoneInput.value : '-';
             
             let extraInfo = '';
             const timeInput = popupForm.querySelector('input[name*="время"]');
             if (timeInput) extraInfo = timeInput.value;
-
             const messenger = popupForm.querySelector('input[name="messenger-type"]:checked')?.value || '-';
 
             const text = `<b>🔔 Заявка из ПОПАПА!</b>\n` +
                          `<b>👤 Имя:</b> ${name}\n` +
                          `<b>📞 Тел:</b> ${phone}\n` +
                          `<b>📧 Email:</b> ${email}\n` +
-                         `<b>💬 Мессенджер:</b> ${messenger}\n` +
-                         `<b>⏰ Время:</b> ${extraInfo}`;
+                         `<b>💬 Связь:</b> ${messenger}\n` +
+                         `<b>⏰ Инфо:</b> ${extraInfo}`;
 
             fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
                 method: 'POST',
