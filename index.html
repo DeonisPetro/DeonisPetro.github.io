@@ -576,240 +576,341 @@ function copyText(element) {var clone=element.cloneNode(true);var tooltipInClone
 var textToCopy=clone.textContent.trim();var tooltip=element.querySelector('.copy-tooltip');navigator.clipboard.writeText(textToCopy).then(function() {if(tooltip) {tooltip.innerText='Скопировано!';tooltip.classList.add('copied');}
 setTimeout(()=>{if(tooltip) {tooltip.innerText='Копировать';tooltip.classList.remove('copied');}},2000);}).catch(function(err) {console.error('Ошибка копирования: ',err);});}
 var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {createTooltip(btn);btn.addEventListener('click',function(e) {if(window.innerWidth>991) {e.preventDefault();copyText(btn);}});btn.addEventListener('mouseleave',function() {var tooltip=btn.querySelector('.copy-tooltip');if(tooltip) {setTimeout(()=>{tooltip.innerText='Копировать';tooltip.classList.remove('copied');},300);}});});});</script> </div> </div> <div class='t396__elem tn-elem But tn-elem__13479232611763791353633' data-elem-id='1763791353633' data-elem-type='text' data-field-top-value="161" data-field-left-value="-40" data-field-height-value="28" data-field-width-value="210" data-field-axisy-value="top" data-field-axisx-value="right" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-textfit-value="autoheight" data-field-fontsize-value="18" data-field-top-res-375-value="55" data-field-left-res-375-value="1078"> <div class='tn-atom'field='tn_text_1763791353633'>Devalliance@yandex.ru</div> </div> <div class='t396__elem tn-elem But tn-elem__13479232611763793044779000001' data-elem-id='1763793044779000001' data-elem-type='text' data-field-top-value="108" data-field-left-value="-40" data-field-height-value="28" data-field-width-value="147" data-field-axisy-value="top" data-field-axisx-value="right" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-textfit-value="autoheight" data-field-fontsize-value="18" data-field-top-res-375-value="8" data-field-left-res-375-value="1057"> <div class='tn-atom'field='tn_text_1763793044779000001'>+ 7 952 745 66 31</div> </div> </div> </div> <script>t_onFuncLoad('t396_initialScale',function() {t396_initialScale('1347923261');});t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('1347923261');});});</script> <!-- /T396 --> </div> <div id="rec1349454101" class="r t-rec" style=" " data-animationappear="off" data-record-type="702"> <!-- T702 --> <div class="t702"> <div
-class="t-popup" data-tooltip-hook="#popup:myform"
-role="dialog"
-aria-modal="true"
-tabindex="-1"
-aria-label="Рассчитаем стоимость вашего проекта?"> <div class="t-popup__close t-popup__block-close"> <button
-type="button"
-class="t-popup__close-wrapper t-popup__block-close-button"
-aria-label="Закрыть диалоговое окно"> <svg role="presentation" class="t-popup__close-icon" width="23px" height="23px" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g stroke="none" stroke-width="1" fill="#fff" fill-rule="evenodd"> <rect transform="translate(11.313708, 11.313708) rotate(-45.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect> <rect transform="translate(11.313708, 11.313708) rotate(-315.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect> </g> </svg> </button> </div> <style>@media screen and (max-width:560px){#rec1349454101 .t-popup__close-icon g{fill:#ffffff !important;}}</style> <div class="t-popup__container t-width t-width_6" data-popup-type="702"> <div class="t702__wrapper"> <div class="t702__text-wrapper t-align_center"> <div class="t702__title t-title t-title_xxs" id="popuptitle_1349454101">Рассчитаем стоимость вашего проекта?</div> <div class="t702__descr t-descr t-descr_xs">Это бесплатно</div> </div>
-<form id="popup-form-tg" action="" method="POST" class="t-form t-form_inputs-total_5">
-<input type="hidden" name="_next" value="https://DeonisPetro.github.io/success.html">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_subject" value="Новая заявка с сайта!"> <input type="hidden" name="formservices[]" value="b5f3a7c5ab1c7628abedbd8a765c3f20" class="js-formaction-services"> <!-- @classes t-title t-text t-btn --> <div class="js-successbox t-form__successbox t-text t-text_md"
-aria-live="polite"
-style="display:none;" data-success-title="Спасибо за вашу заявку!" data-success-message="Мы получили ваши данные и свяжемся с вами в ближайшее время для обсуждения деталей" data-success-btn="Отлично"></div> <div
-class="t-form__inputsbox
-t-form__inputsbox_vertical-form t-form__inputsbox_inrow "> <div
-class=" t-input-group t-input-group_nm " data-input-lid="9003215262381" data-field-type="nm" data-field-name="Name"> <label
-for='input_9003215262381'
-class="t-input-title t-descr t-descr_md"
-id="field-title_9003215262381" data-redactor-toolbar="no"
-field="li_title__9003215262381"
-style="color:;">Ваше имя</label> <div class="t-input-block " style="border-radius:5px;"> <input
-type="text"
-autocomplete="name"
-name="Name"
-id="input_9003215262381"
-class="t-input js-tilda-rule"
-value=""
-placeholder="Иван Петров" data-tilda-rule="name"
-aria-describedby="error_9003215262381"
-style="color:#000000;border:1px solid #c9c9c9;border-radius:5px;"> </div> <div class="t-input-error" aria-live="polite" id="error_9003215262381"></div> </div> <div
-class=" t-input-group t-input-group_em " data-input-lid="9003215262380" data-field-type="em" data-field-name="Email"> <label
-for='input_9003215262380'
-class="t-input-title t-descr t-descr_md"
-id="field-title_9003215262380" data-redactor-toolbar="no"
-field="li_title__9003215262380"
-style="color:;">Ваш email</label> <div class="t-input-block " style="border-radius:5px;"> <input
-type="email"
-autocomplete="email"
-name="Email"
-id="input_9003215262380"
-class="t-input js-tilda-rule"
-value=""
-placeholder="info@yourbusiness.com" data-tilda-req="1" aria-required="true" data-tilda-rule="email"
-aria-describedby="error_9003215262380"
-style="color:#000000;border:1px solid #c9c9c9;border-radius:5px;"> </div> <div class="t-input-error" aria-live="polite" id="error_9003215262380"></div> </div> <div
-class=" t-input-group t-input-group_contact_method " data-input-lid="1761999348733" data-field-async="true" data-field-type="contact_method" data-field-name="messenger-type;messenger-id"> <div
-class="t-input-title t-descr t-descr_md"
-id="field-title_1761999348733" data-redactor-toolbar="no"
-field="li_title__1761999348733"
-style="color:;">Выберите удобный способ связи</div> <div class="t-input-block " style="border-radius:5px;"> <div class="t-contact-method__container"> <div class="t-contact-method__types-container"> <div
-class="t-radio__item t-contact-method__type t-text t-text_xs" data-method-type="telegram"> <label
-for="contact-method-1761999348733-0"
-class="t-contact-method__type-label"> <svg class="t-sociallinks__svg" role="presentation" width=18 height=18 viewBox="0 0 100 100" fill="none"
-xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_3733_946)"> <path fill-rule="evenodd" clip-rule="evenodd"
-d="M50 100C77.614 100 100 77.614 100 50C100 22.386 77.614 0 50 0C22.386 0 0 22.386 0 50C0 77.614 22.386 100 50 100ZM71.977 31.944C72.363 27.564 67.737 29.368 67.737 29.368C64.3991 30.7501 60.9589 32.1532 57.481 33.5717C57.4007 33.6045 57.3203 33.6372 57.24 33.67C46.2 38.173 34.796 42.825 25.081 47.404C19.813 49.336 22.897 51.268 22.897 51.268L31.248 53.845C35.103 55.005 37.158 53.716 37.158 53.716L55.146 41.478C61.57 37.098 60.028 40.705 58.486 42.251L44.996 55.133C42.94 56.937 43.968 58.483 44.867 59.256C47.417 61.505 53.687 65.62 56.424 67.416C57.136 67.883 57.609 68.194 57.716 68.274C58.358 68.789 61.827 71.108 64.14 70.593C66.453 70.077 66.71 67.114 66.71 67.114L69.793 46.888C70.2539 43.385 70.7836 40.0174 71.2071 37.3245C71.2081 37.3183 71.209 37.3122 71.21 37.306C71.2119 37.2938 71.2138 37.2817 71.2157 37.2696C71.6129 34.7415 71.9153 32.8168 71.977 31.944Z"
-fill=#1d98dc /> <path
-d="M71.977 31.944C72.363 27.564 67.737 29.368 67.737 29.368C64.3991 30.7501 60.9589 32.1532 57.481 33.5717L57.24 33.67C46.2 38.173 34.796 42.825 25.081 47.404C19.813 49.336 22.897 51.268 22.897 51.268L31.248 53.845C35.103 55.005 37.158 53.716 37.158 53.716L55.146 41.478C61.57 37.098 60.028 40.705 58.486 42.251L44.996 55.133C42.94 56.937 43.968 58.483 44.867 59.256C47.417 61.505 53.687 65.62 56.424 67.416C57.136 67.883 57.609 68.194 57.716 68.274C58.358 68.789 61.827 71.108 64.14 70.593C66.453 70.077 66.71 67.114 66.71 67.114L69.793 46.888C70.2539 43.385 70.7836 40.0174 71.2071 37.3245L71.21 37.306L71.2157 37.2696C71.6129 34.7415 71.9153 32.8168 71.977 31.944Z"
-fill="#ffffff" /> </g> <defs> <clipPath id="clip0_3733_946"> <rect width="100" height="100" rx="50" fill="white" /> </clipPath> </defs> </svg> <span data-contact-method="telegram" class="t-contact-method__title">
-Telegram
-</span> </label> <input
-id="contact-method-1761999348733-0"
-type="radio"
-class="t-radio js-tilda-rule t-contact-method__type-input"
-name="messenger-type"
-value="telegram" data-tilda-req="1" aria-required="true" checked > </div> <div
-class="t-radio__item t-contact-method__type t-text t-text_xs" data-method-type="phone"> <label
-for="contact-method-1761999348733-1"
-class="t-contact-method__type-label"> <svg class="t-sociallinks__svg" role="presentation" width=18 height=18 viewBox="0 0 100 100" fill="none"
-xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_3733_932)"> <mask id="mask0_3733_932" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="100"
-height="100"> <path d="M0 0H100V100H0V0Z" fill="white" /> </mask> <g mask="url(#mask0_3733_932)"> <path fill-rule="evenodd" clip-rule="evenodd"
-d="M50 100C77.6142 100 100 77.6142 100 50C100 22.3858 77.6142 0 50 0C22.3858 0 0 22.3858 0 50C0 77.6142 22.3858 100 50 100ZM32.3668 30.3616C33.8958 28.835 34.6798 28.1875 35.1534 28.0601C35.715 27.909 36.2052 28.0405 36.7168 28.4797C37.1497 28.8512 38.2438 29.9713 38.9927 30.8096C41.1931 33.2729 43.8747 36.6359 44.2503 37.4031C44.3639 37.6353 44.375 37.701 44.3558 38.0323C44.3204 38.643 44.196 38.8343 43.3793 39.5344C42.0767 40.6509 40.0803 42.739 39.3824 43.7149C38.9257 44.3535 38.9126 44.7536 39.3248 45.483C39.675 46.1027 41.378 48.345 42.5783 49.7667C44.5875 52.1467 46.9159 54.3696 49.1773 56.0669C50.8579 57.3283 53.2214 58.7821 54.8035 59.5275C55.9343 60.0603 56.2878 60.0303 57.0122 59.3401C57.7069 58.6782 58.5246 57.6102 59.8946 55.5759C60.3408 54.9132 60.7739 54.3136 60.857 54.2434C61.1104 54.0293 61.3967 53.9282 61.8141 53.9055C62.0813 53.891 62.2608 53.9062 62.4057 53.9555C62.6843 54.0504 63.4107 54.5045 66.36 56.4276C67.7285 57.32 69.2454 58.3032 69.7309 58.6125C72.4818 60.3651 72.7871 60.6005 72.9291 61.0781C73.1185 61.7157 72.9605 62.1254 72.063 63.3233C70.9487 64.8107 69.0734 66.8197 67.674 68.0252C66.5388 69.0032 65.0797 69.9865 63.6409 70.743L63.0188 71.0701L62.389 71.0696C60.5532 71.0685 58.822 70.7024 56.1724 69.7552C49.967 67.5366 44.465 64.2895 39.647 60.0025C38.7431 59.1981 36.6429 57.0816 35.8606 56.1866C33.2537 53.2039 31.2905 50.2948 29.5948 46.9021C28.373 44.4575 27.2502 41.6203 27.0609 40.4995C26.7835 38.8572 27.4592 36.7086 28.9757 34.4108C29.8832 33.0359 30.8773 31.8488 32.3668 30.3616Z"
-fill="#000" /> <path
-d="M32.3668 30.3616C33.8958 28.835 34.6798 28.1875 35.1534 28.0601C35.715 27.909 36.2052 28.0405 36.7168 28.4797C37.1497 28.8512 38.2438 29.9713 38.9927 30.8096C41.1931 33.2729 43.8747 36.6359 44.2503 37.4031C44.3639 37.6353 44.375 37.701 44.3558 38.0323C44.3204 38.643 44.196 38.8343 43.3793 39.5344C42.0767 40.6509 40.0803 42.739 39.3824 43.7149C38.9257 44.3535 38.9126 44.7536 39.3248 45.483C39.675 46.1027 41.378 48.345 42.5783 49.7667C44.5875 52.1467 46.9159 54.3696 49.1773 56.0669C50.8579 57.3283 53.2214 58.7821 54.8035 59.5275C55.9343 60.0603 56.2878 60.0303 57.0122 59.3401C57.7069 58.6782 58.5246 57.6102 59.8946 55.5759C60.3408 54.9132 60.7739 54.3136 60.857 54.2434C61.1104 54.0293 61.3967 53.9282 61.8141 53.9055C62.0813 53.891 62.2608 53.9062 62.4057 53.9555C62.6843 54.0504 63.4107 54.5045 66.36 56.4276C67.7285 57.32 69.2454 58.3032 69.7309 58.6125C72.4818 60.3651 72.7871 60.6005 72.9291 61.0781C73.1185 61.7157 72.9605 62.1254 72.063 63.3233C70.9487 64.8107 69.0734 66.8197 67.674 68.0252C66.5388 69.0032 65.0797 69.9865 63.6409 70.743L63.0188 71.0701L62.389 71.0696C60.5532 71.0685 58.822 70.7024 56.1724 69.7552C49.967 67.5366 44.465 64.2895 39.647 60.0025C38.7431 59.1981 36.6429 57.0816 35.8606 56.1866C33.2537 53.2039 31.2905 50.2948 29.5948 46.9021C28.373 44.4575 27.2502 41.6203 27.0609 40.4995C26.7835 38.8572 27.4592 36.7086 28.9757 34.4108C29.8832 33.0359 30.8773 31.8488 32.3668 30.3616Z"
-fill="#ffffff" /> </g> </g> <defs> <clipPath id="clip0_3733_932"> <rect width="100" height="100" rx="50" fill="white" /> </clipPath> </defs> </svg> <span data-contact-method="phone" class="t-contact-method__title">
-Phone
-</span> </label> <input
-id="contact-method-1761999348733-1"
-type="radio"
-class="t-radio js-tilda-rule t-contact-method__type-input"
-name="messenger-type"
-value="phone" data-tilda-req="1" aria-required="true"> </div> <div
-class="t-radio__item t-contact-method__type t-text t-text_xs" data-method-type="whatsapp"> <label
-for="contact-method-1761999348733-3"
-class="t-contact-method__type-label"> <svg class="t-sociallinks__svg" role="presentation" width=18 height=18 viewBox="0 0 100 100" fill="none"
-xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_3733_942)"> <path fill-rule="evenodd" clip-rule="evenodd"
-d="M50 100C77.6142 100 100 77.6142 100 50C100 22.3858 77.6142 0 50 0C22.3858 0 0 22.3858 0 50C0 77.6142 22.3858 100 50 100ZM69.7626 28.9928C64.6172 23.841 57.7739 21.0027 50.4832 21C35.4616 21 23.2346 33.2252 23.2292 48.2522C23.2274 53.0557 24.4823 57.7446 26.8668 61.8769L23 76L37.4477 72.2105C41.4282 74.3822 45.9107 75.5262 50.4714 75.528H50.4823C65.5029 75.528 77.7299 63.301 77.7363 48.2749C77.7408 40.9915 74.9089 34.1446 69.7626 28.9928ZM62.9086 53.9588C62.2274 53.6178 58.8799 51.9708 58.2551 51.7435C57.6313 51.5161 57.1766 51.4024 56.7228 52.0845C56.269 52.7666 54.964 54.2998 54.5666 54.7545C54.1692 55.2092 53.7718 55.2656 53.0915 54.9246C52.9816 54.8695 52.8321 54.8047 52.648 54.7248C52.6456 54.7237 52.6433 54.7227 52.6409 54.7217C51.6819 54.3057 49.7905 53.4855 47.6151 51.5443C45.5907 49.7382 44.2239 47.5084 43.8265 46.8272C43.4291 46.1452 43.7837 45.7769 44.1248 45.4376C44.3288 45.2341 44.5632 44.9488 44.7975 44.6635L44.7987 44.662C44.9157 44.5194 45.0328 44.3768 45.146 44.2445C45.4342 43.9078 45.5597 43.6521 45.7297 43.306L45.7302 43.3049C45.7607 43.2427 45.7926 43.1776 45.8272 43.1087C46.0545 42.654 45.9409 42.2565 45.7708 41.9155C45.658 41.6893 45.0207 40.1383 44.4386 38.7218C44.4346 38.712 44.4305 38.7021 44.4265 38.6923C44.423 38.6839 44.4196 38.6755 44.4161 38.667C44.1289 37.968 43.8572 37.3065 43.671 36.8592C43.1828 35.687 42.6883 35.69 42.2913 35.6924C42.2386 35.6928 42.1876 35.6931 42.1386 35.6906C41.7421 35.6706 41.2874 35.667 40.8336 35.667C40.3798 35.667 39.6423 35.837 39.0175 36.5191C38.9773 36.5631 38.9323 36.6111 38.8834 36.6633C38.1738 37.4209 36.634 39.0648 36.634 42.2002C36.634 45.544 39.062 48.7748 39.4124 49.2411L39.415 49.2444C39.4362 49.2728 39.4735 49.3264 39.5266 49.4024C39.5288 49.4056 39.531 49.4088 39.5333 49.4121C40.3462 50.5782 44.6615 56.7691 51.0481 59.5271C52.6732 60.2291 53.9409 60.6475 54.9303 60.9612C56.5618 61.4796 58.046 61.4068 59.22 61.2313C60.5286 61.0358 63.2487 59.5844 63.8161 57.9938C64.3836 56.4033 64.3836 55.0392 64.2136 54.7554C64.0764 54.5258 63.7545 54.3701 63.2776 54.1395C63.1633 54.0843 63.0401 54.0247 62.9086 53.9588Z"
-fill="#27d061" /> <path fill-rule="evenodd" clip-rule="evenodd"
-d="M69.7626 28.9928C64.6172 23.841 57.7739 21.0027 50.4832 21C35.4616 21 23.2346 33.2252 23.2292 48.2522C23.2274 53.0557 24.4823 57.7446 26.8668 61.8769L23 76L37.4477 72.2105C41.4282 74.3822 45.9107 75.5262 50.4714 75.528H50.4823C65.5029 75.528 77.7299 63.301 77.7363 48.2749C77.7408 40.9915 74.9089 34.1446 69.7626 28.9928ZM58.2551 51.7435C58.8799 51.9708 62.2274 53.6178 62.9086 53.9588C63.0401 54.0247 63.1633 54.0843 63.2776 54.1395C63.7545 54.3701 64.0764 54.5258 64.2136 54.7554C64.3836 55.0392 64.3836 56.4033 63.8161 57.9938C63.2487 59.5844 60.5286 61.0358 59.22 61.2313C58.046 61.4068 56.5618 61.4796 54.9303 60.9612C53.9409 60.6475 52.6732 60.2291 51.0481 59.5271C44.6621 56.7694 40.3468 50.5791 39.5333 49.4121L39.5266 49.4024C39.4735 49.3264 39.4362 49.2728 39.415 49.2444L39.4124 49.2411C39.062 48.7748 36.634 45.544 36.634 42.2002C36.634 39.0648 38.1738 37.4209 38.8834 36.6633C38.9323 36.6111 38.9773 36.5631 39.0175 36.5191C39.6423 35.837 40.3798 35.667 40.8336 35.667C41.2874 35.667 41.7421 35.6706 42.1386 35.6906C42.1876 35.6931 42.2386 35.6928 42.2913 35.6924C42.6883 35.69 43.1828 35.687 43.671 36.8592C43.8572 37.3065 44.1289 37.968 44.4161 38.667L44.4265 38.6923L44.4386 38.7218C45.0207 40.1383 45.658 41.6893 45.7708 41.9155C45.9409 42.2565 46.0545 42.654 45.8272 43.1087C45.7926 43.1776 45.7607 43.2427 45.7302 43.3049L45.7297 43.306C45.5597 43.6521 45.4342 43.9078 45.146 44.2445C45.0328 44.3768 44.9157 44.5194 44.7987 44.662L44.7975 44.6635C44.5632 44.9488 44.3288 45.2341 44.1248 45.4376C43.7837 45.7769 43.4291 46.1452 43.8265 46.8272C44.2239 47.5084 45.5907 49.7382 47.6151 51.5443C49.7905 53.4855 51.6819 54.3057 52.6409 54.7217L52.648 54.7248C52.8321 54.8047 52.9816 54.8695 53.0915 54.9246C53.7718 55.2656 54.1692 55.2092 54.5666 54.7545C54.964 54.2998 56.269 52.7666 56.7228 52.0845C57.1766 51.4024 57.6313 51.5161 58.2551 51.7435Z"
-fill="#ffffff" /> </g> <defs> <clipPath id="clip0_3733_942"> <rect width="100" height="100" rx="50" fill="white" /> </clipPath> </defs> </svg> <span data-contact-method="whatsapp" class="t-contact-method__title">
-WhatsApp
-</span> </label> <input
-id="contact-method-1761999348733-3"
-type="radio"
-class="t-radio js-tilda-rule t-contact-method__type-input"
-name="messenger-type"
-value="whatsapp" data-tilda-req="1" aria-required="true"> </div> <div
-class="t-radio__item t-contact-method__type t-text t-text_xs" data-method-type="vk"> <label
-for="contact-method-1761999348733-4"
-class="t-contact-method__type-label"> <svg class="t-sociallinks__svg" role="presentation" width=18 height=18 viewBox="0 0 100 100" fill="none"
-xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_3733_948)"> <path fill-rule="evenodd" clip-rule="evenodd"
-d="M50 100C77.614 100 100 77.614 100 50C100 22.386 77.614 0 50 0C22.386 0 0 22.386 0 50C0 77.614 22.386 100 50 100ZM25 34C25.406 53.488 35.15 65.2 52.233 65.2H53.201V54.05C59.479 54.675 64.225 59.266 66.131 65.2H75C72.564 56.33 66.162 51.427 62.164 49.553C66.162 47.242 71.783 41.62 73.126 34H65.068C63.319 40.184 58.136 45.805 53.201 46.336V34H45.144V55.611C40.147 54.362 33.838 48.304 33.556 34H25Z"
-fill="#0077ff" /> <path
-d="M25 34C25.406 53.488 35.15 65.2 52.233 65.2H53.201V54.05C59.479 54.675 64.225 59.266 66.131 65.2H75C72.564 56.33 66.162 51.427 62.164 49.553C66.162 47.242 71.783 41.62 73.126 34H65.068C63.319 40.184 58.136 45.805 53.201 46.336V34H45.144V55.611C40.147 54.362 33.838 48.304 33.556 34H25Z"
-fill="#ffffff" /> </g> <defs> <clipPath id="clip0_3733_948"> <rect width="100" height="100" rx="50" fill="white" /> </clipPath> </defs> </svg> <span data-contact-method="vk" class="t-contact-method__title">
-VK
-</span> </label> <input
-id="contact-method-1761999348733-4"
-type="radio"
-class="t-radio js-tilda-rule t-contact-method__type-input"
-name="messenger-type"
-value="vk" data-tilda-req="1" aria-required="true"> </div> </div> <div class="t-contact-method__value-container"> <div class="t-contact-method__phone-value t-phonemask-input-group"> <div class="t-input-block"> <input
-type="tel"
-autocomplete="tel"
-name="messenger-id"
-id=input_1761999348733 data-phonemask-init="no" data-phonemask-id="1349454101" data-phonemask-lid="1761999348733" data-phonemask-skip-auto-init="true" data-phonemask-maskcountry="RU" class="t-input js-phonemask-input js-tilda-rule t-input-phonemask__wrap "
-value=""
-placeholder="" data-tilda-req="1" aria-required="true" aria-describedby="error_1761999348733"
-style="color:#000000;border:1px solid #c9c9c9;border-radius:5px;"> </div> </div> <div class="t-contact-method__telegram-value t-phonemask-input-group t-contact-method__hybrid"> <div class="t-input-block"> <input
-type="tel"
-autocomplete="tel"
-name="messenger-id"
-id=input_1761999348733 data-phonemask-init="no" data-phonemask-id="1349454101" data-phonemask-lid="1761999348733" data-phonemask-skip-auto-init="true" data-phonemask-maskcountry="RU" class="t-input js-phonemask-input js-tilda-rule t-input-phonemask__wrap "
-value=""
-placeholder="" data-tilda-req="1" aria-required="true" aria-describedby="error_1761999348733"
-style="color:#000000;border:1px solid #c9c9c9;border-radius:5px;"> </div> <div class="t-input-block"> <input
-type="text"
-name="messenger-id"
-id=input_1761999348733
-class="t-input js-username-input js-tilda-rule "
-value=""
-placeholder="Username or phone number" data-tilda-req="1" aria-required="true" aria-describedby="error_1761999348733"
-style="color:#000000;border:1px solid #c9c9c9;border-radius:5px;" data-contact-method="telegram"> </div> </div> <div class="t-contact-method__whatsapp-value t-phonemask-input-group"> <div class="t-input-block"> <input
-type="tel"
-autocomplete="tel"
-name="messenger-id"
-id=input_1761999348733 data-phonemask-init="no" data-phonemask-id="1349454101" data-phonemask-lid="1761999348733" data-phonemask-skip-auto-init="true" data-phonemask-maskcountry="RU" class="t-input js-phonemask-input js-tilda-rule t-input-phonemask__wrap "
-value=""
-placeholder="" data-tilda-req="1" aria-required="true" aria-describedby="error_1761999348733"
-style="color:#000000;border:1px solid #c9c9c9;border-radius:5px;"> </div> </div> <div class="t-contact-method__vk-value"> <div class="t-input-block"> <input
-type="text"
-name="messenger-id"
-id=input_1761999348733
-class="t-input js-username-input js-tilda-rule "
-value=""
-placeholder="Username, ID or link" data-tilda-req="1" aria-required="true" aria-describedby="error_1761999348733"
-style="color:#000000;border:1px solid #c9c9c9;border-radius:5px;" data-contact-method="vk"> </div> </div> </div> </div> <script type="text/javascript">t_onReady(function() {t_onFuncLoad('t_loadCSSFile',function() {t_loadCSSFile('css/tilda-contact-method-1.0.min.css');});t_onFuncLoad('t_loadJsFile',function() {t_loadJsFile('js/tilda-phone-mask-1.1.min.js');t_loadJsFile('js/tilda-contact-method-1.0.min.js',function() {t_onFuncLoad('t_contactMethod__init',function() {t_contactMethod__init('1349454101','1761999348733');})})});});</script> </div> <div class="t-input-error" aria-live="polite" id="error_1761999348733"></div> </div> <div
-class=" t-input-group t-input-group_in " data-input-lid="1761999669889" data-field-type="in" data-field-name="Укажите удобное время для звонка/сообщения"> <label
-for='input_1761999669889'
-class="t-input-title t-descr t-descr_md"
-id="field-title_1761999669889" data-redactor-toolbar="no"
-field="li_title__1761999669889"
-style="color:;">Укажите удобное время для звонка/сообщения</label> <div class="t-input-block " style="border-radius:5px;"> <input
-type="text"
-name="Укажите удобное время для звонка/сообщения"
-id="input_1761999669889"
-class="t-input js-tilda-rule"
-value=""
-placeholder="В 18:00 по МСК"
-aria-describedby="error_1761999669889"
-style="color:#000000;border:1px solid #c9c9c9;border-radius:5px;"> </div> <div class="t-input-error" aria-live="polite" id="error_1761999669889"></div> </div> <div
-class=" t-input-group t-input-group_cb " data-input-lid="1760514322491" data-field-type="cb" data-field-name="Checkbox"> <div class="t-input-block " style="border-radius:5px;"> <label
-class="t-checkbox__control t-checkbox__control_flex t-text t-text_xs"
-style=""> <input
-type="checkbox"
-name="Checkbox"
-value="yes"
-class="t-checkbox js-tilda-rule"> <div
-class="t-checkbox__indicator"></div> <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span></label> </div> <div class="t-input-error" aria-live="polite" id="error_1760514322491"></div> </div> <div class="t-form__errorbox-middle"> <!--noindex--> <div
-class="js-errorbox-all t-form__errorbox-wrapper"
-style="display:none;" data-nosnippet
-tabindex="-1"
-aria-label="Ошибки при заполнении формы"> <ul
-role="list"
-class="t-form__errorbox-text t-text t-text_md"> <li class="t-form__errorbox-item js-rule-error js-rule-error-all"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-req"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-email"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-name"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-phone"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-minlength"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-string"></li> </ul> </div> <!--/noindex--> </div> <div class="t-form__submit"> <button
-class="t-submit t-btnflex t-btnflex_type_submit t-btnflex_md"
-type="button" id="popup-btn-tg"> <span class="t-btnflex__text">Получить расчет и план работ</span> <style>#rec1349454101 .t-btnflex.t-btnflex_type_submit {color:#ffffff;background-color:#000000;border-style:none !important;border-radius:5px;box-shadow:none !important;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}</style> </button> </div> </div> <div class="t-form__errorbox-bottom"> <!--noindex--> <div
-class="js-errorbox-all t-form__errorbox-wrapper"
-style="display:none;" data-nosnippet
-tabindex="-1"
-aria-label="Ошибки при заполнении формы"> <ul
-role="list"
-class="t-form__errorbox-text t-text t-text_md"> <li class="t-form__errorbox-item js-rule-error js-rule-error-all"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-req"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-email"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-name"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-phone"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-minlength"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-string"></li> </ul> </div> <!--/noindex--> </div> </form>
-<script>
-document.addEventListener("click", function(e) {
-    // Проверяем, был ли клик по нашей кнопке (или внутри неё)
-    const target = e.target.closest('#popup-btn-tg');
+<!-- ============================================================== -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ВЗАМЕН ТИЛЬДЫ) -->
+<!-- ============================================================== -->
+
+<style>
+    /* 1. Стили затемнения (фона) */
+    .my-popup-overlay {
+        display: none; /* Скрыто по умолчанию */
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный */
+        backdrop-filter: blur(5px); /* Размытие фона */
+        z-index: 9999999; /* Поверх всего */
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
     
-    if (target) {
-        // Останавливаем всё, что могла бы сделать Тильда
+    /* 2. Стили самого окна */
+    .my-popup-box {
+        background: #ffffff;
+        width: 100%;
+        max-width: 1000px; /* Ширина как просили */
+        padding: 50px 60px;
+        border-radius: 8px;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        font-family: 'Montserrat', Arial, sans-serif;
+        text-align: left;
+        margin: auto;
+    }
+
+    /* Крестик закрытия */
+    .my-popup-close {
+        position: absolute;
+        top: 20px; right: 20px;
+        width: 30px; height: 30px;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: 0.3s;
+    }
+    .my-popup-close:hover { opacity: 1; }
+    .my-popup-close:before, .my-popup-close:after {
+        content: ''; position: absolute; top: 14px; left: 0;
+        width: 30px; height: 2px; background: #000;
+        transform: rotate(45deg);
+    }
+    .my-popup-close:after { transform: rotate(-45deg); }
+
+    /* Тексты */
+    .my-popup-title {
+        font-size: 36px;
+        font-weight: 600;
+        color: #000;
+        text-align: center;
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+    .my-popup-subtitle {
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    /* Сетка формы */
+    .my-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 колонки */
+        gap: 25px;
+    }
+    @media (max-width: 768px) {
+        .my-form-grid { grid-template-columns: 1fr; } /* 1 колонка на мобильном */
+        .my-popup-box { padding: 30px 20px; }
+        .my-popup-title { font-size: 24px; }
+    }
+
+    /* Поля ввода */
+    .my-inp-group { position: relative; }
+    
+    .my-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #000;
+    }
+
+    .my-inp {
+        width: 100%;
+        height: 55px;
+        background: transparent; /* Без заливки */
+        border: 1px solid #c9c9c9; /* Серая окантовка */
+        border-radius: 5px;
+        padding: 0 20px;
+        font-size: 16px;
+        color: #000;
+        font-family: inherit;
+        box-sizing: border-box;
+        transition: 0.3s;
+        outline: none;
+        appearance: none;
+    }
+    .my-inp:focus { border-color: #000; }
+    .my-inp.error { border-color: #ff4d4d; }
+
+    .my-inp-textarea {
+        height: 120px;
+        padding-top: 15px;
+        resize: none;
+    }
+    .full-width { grid-column: 1 / -1; }
+
+    /* Сообщения об ошибках */
+    .error-msg {
+        color: #ff4d4d;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none; /* Скрыто по умолчанию */
+    }
+
+    /* Чекбокс */
+    .my-check-group {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: flex-start;
+        font-size: 12px;
+        color: #555;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    .my-check-group input {
+        margin-right: 10px;
+        margin-top: 2px;
+        width: 18px; height: 18px;
+        cursor: pointer;
+        accent-color: #000;
+    }
+    .my-check-group.error span { color: #ff4d4d; }
+
+    /* Кнопка отправки */
+    .my-btn-submit {
+        grid-column: 1 / -1;
+        width: 100%;
+        height: 60px;
+        background: #000;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+    .my-btn-submit:hover {
+        background: #333;
+        transform: translateY(-2px);
+    }
+</style>
+
+<!-- HTML КОД ОКНА -->
+<div id="my-custom-popup" class="my-popup-overlay">
+    <div class="my-popup-box">
+        <div class="my-popup-close" onclick="closeMyPopup()"></div>
+        
+        <div class="my-popup-title">Рассчитаем стоимость вашего проекта?</div>
+        <div class="my-popup-subtitle">Это бесплатно</div>
+
+        <form id="my-popup-form">
+            <div class="my-form-grid">
+                <!-- Имя -->
+                <div class="my-inp-group">
+                    <label class="my-label">Ваше имя</label>
+                    <input type="text" name="Name" class="my-inp" placeholder="Иван">
+                </div>
+
+                <!-- Телефон -->
+                <div class="my-inp-group">
+                    <label class="my-label">Ваш телефон</label>
+                    <input type="tel" name="Phone" class="my-inp" placeholder="+7 (999) 000-00-00">
+                    <div class="error-msg">Введите корректный номер телефона</div>
+                </div>
+
+                <!-- Email -->
+                <div class="my-inp-group">
+                    <label class="my-label">Ваш E-mail</label>
+                    <input type="email" name="Email" class="my-inp" placeholder="mail@example.com">
+                    <div class="error-msg">Введите корректный E-mail</div>
+                </div>
+
+                <!-- Мессенджер -->
+                <div class="my-inp-group">
+                    <label class="my-label">Удобный способ связи</label>
+                    <select name="Messenger" class="my-inp" style="cursor:pointer;">
+                        <option value="Telegram">Telegram</option>
+                        <option value="WhatsApp">WhatsApp</option>
+                        <option value="Phone">По телефону</option>
+                    </select>
+                </div>
+
+                <!-- Сообщение / Время -->
+                <div class="my-inp-group full-width">
+                    <label class="my-label">Комментарий или удобное время</label>
+                    <textarea name="Message" class="my-inp my-inp-textarea" placeholder="Например: звонить после 18:00"></textarea>
+                </div>
+
+                <!-- Чекбокс -->
+                <label class="my-check-group full-width">
+                    <input type="checkbox" id="popup-agree" checked>
+                    <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span>
+                </label>
+
+                <!-- Кнопка -->
+                <button type="submit" class="my-btn-submit">Получить расчет и план работ</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- СКРИПТЫ ЛОГИКИ -->
+<script src="https://unpkg.com/imask"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const popup = document.getElementById('my-custom-popup');
+    const form = document.getElementById('my-popup-form');
+    const phoneInput = form.querySelector('input[name="Phone"]');
+    const emailInput = form.querySelector('input[name="Email"]');
+    const checkbox = form.querySelector('#popup-agree');
+    const btn = form.querySelector('button[type="submit"]');
+
+    // 1. МАСКА ТЕЛЕФОНА
+    const mask = IMask(phoneInput, {
+        mask: '+{7} (000) 000-00-00',
+        lazy: false
+    });
+
+    // 2. ФУНКЦИИ ОТКРЫТИЯ / ЗАКРЫТИЯ
+    window.openMyPopup = function(e) {
+        if(e) e.preventDefault();
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Блок скролла
+    }
+
+    window.closeMyPopup = function() {
+        popup.style.display = 'none';
+        document.body.style.overflow = ''; // Разблок скролла
+    }
+
+    // Закрытие по фону
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) closeMyPopup();
+    });
+
+    // 3. ПЕРЕХВАТ КЛИКА ПО ВАШЕЙ КНОПКЕ "ОБСУДИТЬ ПРОЕКТ"
+    document.addEventListener('click', function(e) {
+        // Ищем клик по ссылке, содержащей #popup:myform
+        const link = e.target.closest('a[href*="#popup:myform"]') || e.target.closest('a[href="#contact-us"]'); 
+        // (Я добавил #contact-us на всякий случай, если вы поменяли ссылку)
+        
+        if (link) {
+            e.preventDefault();
+            e.stopPropagation(); // Остановить Тильду
+            openMyPopup();
+        }
+    }, true); // true = перехват на самой ранней стадии
+
+    // 4. ВАЛИДАЦИЯ И ОТПРАВКА
+    function setError(input, show) {
+        const msg = input.parentNode.querySelector('.error-msg');
+        if(show) {
+            input.classList.add('error');
+            if(msg) msg.style.display = 'block';
+        } else {
+            input.classList.remove('error');
+            if(msg) msg.style.display = 'none';
+        }
+    }
+
+    // Сброс ошибок при вводе
+    phoneInput.addEventListener('input', () => setError(phoneInput, false));
+    emailInput.addEventListener('input', () => setError(emailInput, false));
+    checkbox.addEventListener('change', () => {
+        if(checkbox.checked) checkbox.closest('label').classList.remove('error');
+    });
+
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        e.stopPropagation();
+        let hasError = false;
 
-        // Ищем форму ОТНОСИТЕЛЬНО кнопки (самый надежный способ)
-        const popupForm = target.closest('form');
-        if (!popupForm) return;
-
-        // 1. ПРОВЕРКА ВАЛИДНОСТИ
-        if (!popupForm.reportValidity()) {
-            return; // Браузер покажет ошибки
+        // Проверка Телефона (минимум 16 символов с маской)
+        if (mask.unmaskedValue.length < 11) {
+            setError(phoneInput, true);
+            hasError = true;
         }
 
-        // 2. ДОП ПРОВЕРКИ
-        const phoneInput = popupForm.querySelector('input[type="tel"]') || popupForm.querySelector('input[name="Phone"]');
-        if (phoneInput && phoneInput.value.length < 11) {
-            alert('Введите корректный телефон');
-            return;
+        // Проверка Email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+            setError(emailInput, true);
+            hasError = true;
         }
 
-        // 3. ОТПРАВКА
-        const btn = target;
+        // Проверка Чекбокса
+        if (!checkbox.checked) {
+            checkbox.closest('label').classList.add('error');
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Отправка
         const originalText = btn.innerText;
         btn.innerText = 'Отправка...';
+        btn.style.opacity = '0.7';
 
         const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
         const TG_CHAT_ID = "-1002935952114";
 
-        const name = popupForm.querySelector('input[name="Name"]')?.value || '-';
-        const email = popupForm.querySelector('input[name="Email"]')?.value || '-';
-        const phone = phoneInput ? phoneInput.value : '-';
-        
-        let extraInfo = '';
-        const timeInput = popupForm.querySelector('input[name*="время"]');
-        if (timeInput) extraInfo = timeInput.value;
-        
-        const messengerInput = popupForm.querySelector('input[name="messenger-type"]:checked');
-        const messenger = messengerInput ? messengerInput.value : '-';
+        const name = form.querySelector('input[name="Name"]').value || 'Не указано';
+        const phone = phoneInput.value;
+        const email = emailInput.value;
+        const mess = form.querySelector('select[name="Messenger"]').value;
+        const msg = form.querySelector('textarea[name="Message"]').value || '-';
 
-        const text = `<b>🔔 Заявка из ПОПАПА!</b>\n` +
+        const text = `<b>🔔 ЗАЯВКА (НОВЫЙ ПОПАП)</b>\n\n` +
                      `<b>👤 Имя:</b> ${name}\n` +
                      `<b>📞 Тел:</b> ${phone}\n` +
                      `<b>📧 Email:</b> ${email}\n` +
-                     `<b>💬 Связь:</b> ${messenger}\n` +
-                     `<b>⏰ Инфо:</b> ${extraInfo}`;
+                     `<b>💬 Связь:</b> ${mess}\n` +
+                     `<b>📝 Инфо:</b> ${msg}`;
 
         fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
             method: 'POST',
@@ -818,25 +919,20 @@ document.addEventListener("click", function(e) {
         })
         .then(res => {
             if (res.ok) window.location.href = 'https://DeonisPetro.github.io/success.html';
-            else { alert('Ошибка отправки'); btn.innerText = originalText; }
+            else { 
+                alert('Ошибка отправки'); 
+                btn.innerText = originalText; 
+                btn.style.opacity = '1'; 
+            }
         })
         .catch(err => {
             alert('Ошибка сети');
             btn.innerText = originalText;
+            btn.style.opacity = '1';
         });
-    }
-});
-
-// Инициализация маски (отдельно)
-document.addEventListener("DOMContentLoaded", function() {
-    const phoneInput = document.querySelector('#popup-form-tg input[type="tel"]');
-    if (typeof IMask !== 'undefined' && phoneInput) {
-        IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
-    }
+    });
 });
 </script>
-<style>#rec1349454101 input::-webkit-input-placeholder {color:#000000;opacity:0.5;}#rec1349454101 input::-moz-placeholder{color:#000000;opacity:0.5;}#rec1349454101 input:-moz-placeholder {color:#000000;opacity:0.5;}#rec1349454101 input:-ms-input-placeholder{color:#000000;opacity:0.5;}#rec1349454101 textarea::-webkit-input-placeholder {color:#000000;opacity:0.5;}#rec1349454101 textarea::-moz-placeholder{color:#000000;opacity:0.5;}#rec1349454101 textarea:-moz-placeholder {color:#000000;opacity:0.5;}#rec1349454101 textarea:-ms-input-placeholder{color:#000000;opacity:0.5;}</style> </div> </div> </div> </div> <script>t_onReady(function() {t_onFuncLoad('t702_initPopup',function() {t702_initPopup('1349454101');});});</script> </div> <div id="rec1450959101" class="r t-rec" style=" " data-animationappear="off" data-record-type="131"> <!-- T123 --> <div class="t123"> <div class="t-container_100 "> <div class="t-width t-width_100 "> <!-- nominify begin --> <!-- ======================================================== --> <!-- ОБЩИЙ БЛОК СТИЛЕЙ ДЛЯ ВСЕХ МОДИФИКАЦИЙ САЙТА      --> <!-- ======================================================== --> <style>
-/* 
   ЛОГИКА 1: "Анти-мерцание" мобильного меню
   (без изменений)
 */
