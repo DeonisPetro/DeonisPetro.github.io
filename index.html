@@ -577,7 +577,7 @@ var textToCopy=clone.textContent.trim();var tooltip=element.querySelector('.copy
 setTimeout(()=>{if(tooltip) {tooltip.innerText='Копировать';tooltip.classList.remove('copied');}},2000);}).catch(function(err) {console.error('Ошибка копирования: ',err);});}
 var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {createTooltip(btn);btn.addEventListener('click',function(e) {if(window.innerWidth>991) {e.preventDefault();copyText(btn);}});btn.addEventListener('mouseleave',function() {var tooltip=btn.querySelector('.copy-tooltip');if(tooltip) {setTimeout(()=>{tooltip.innerText='Копировать';tooltip.classList.remove('copied');},300);}});});});</script> </div> </div> <div class='t396__elem tn-elem But tn-elem__13479232611763791353633' data-elem-id='1763791353633' data-elem-type='text' data-field-top-value="161" data-field-left-value="-40" data-field-height-value="28" data-field-width-value="210" data-field-axisy-value="top" data-field-axisx-value="right" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-textfit-value="autoheight" data-field-fontsize-value="18" data-field-top-res-375-value="55" data-field-left-res-375-value="1078"> <div class='tn-atom'field='tn_text_1763791353633'>Devalliance@yandex.ru</div> </div> <div class='t396__elem tn-elem But tn-elem__13479232611763793044779000001' data-elem-id='1763793044779000001' data-elem-type='text' data-field-top-value="108" data-field-left-value="-40" data-field-height-value="28" data-field-width-value="147" data-field-axisy-value="top" data-field-axisx-value="right" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-textfit-value="autoheight" data-field-fontsize-value="18" data-field-top-res-375-value="8" data-field-left-res-375-value="1057"> <div class='tn-atom'field='tn_text_1763793044779000001'>+ 7 952 745 66 31</div> </div> </div> </div> <script>t_onFuncLoad('t396_initialScale',function() {t396_initialScale('1347923261');});t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('1347923261');});});</script> <!-- /T396 --> </div> <div id="rec1349454101" class="r t-rec" style=" " data-animationappear="off" data-record-type="702"> <!-- T702 --> <div class="t702"> <div
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V3: ФИНАЛЬНЫЙ ФИКС) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V4: ФИНАЛЬНАЯ ГЕОМЕТРИЯ) -->
 <!-- ============================================================== -->
 
 <style>
@@ -591,7 +591,7 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
         background: #ffffff; width: 100%; max-width: 1000px; padding: 50px 60px;
         border-radius: 8px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         font-family: 'Montserrat', Arial, sans-serif; text-align: left; margin: auto;
-        box-sizing: border-box; /* Важно для отступов */
+        box-sizing: border-box;
     }
 
     /* 2. КРЕСТИК */
@@ -607,8 +607,7 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
     /* 3. ЗАГОЛОВКИ */
     .my-popup-title { 
         font-size: 36px; font-weight: 600; color: #000; text-align: center; 
-        margin-bottom: 10px; line-height: 1.2; 
-        margin-top: 10px; /* Отступ сверху */
+        margin-bottom: 10px; line-height: 1.2; margin-top: 10px;
     }
     .my-popup-subtitle { font-size: 16px; color: #666; text-align: center; margin-bottom: 40px; }
 
@@ -620,20 +619,17 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
     @media (max-width: 768px) {
         .my-form-grid { grid-template-columns: 1fr; gap: 20px; }
         .my-popup-box { padding: 30px 20px; }
-        
-        /* Крестик и заголовок */
-        .my-popup-title { 
-            font-size: 24px; 
-            margin-top: 30px; /* Больше отступа, чтобы крестик не мешал */
-            padding: 0 10px;
-        }
-        
-        /* Уменьшаем шрифт кнопки на мобилке */
+        .my-popup-title { font-size: 24px; margin-top: 30px; padding: 0 10px; }
         .my-btn-submit { font-size: 14px !important; } 
+        
+        /* Опускаем подзаголовок на мобилке */
+        .my-popup-subtitle { margin-top: 5px; margin-bottom: 30px; }
     }
 
     /* 5. ПОЛЯ ВВОДА */
     .my-label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #000; }
+    .my-inp-group { margin-bottom: 0; } /* Убрал лишние отступы */
+    
     .my-inp {
         width: 100%; height: 55px; background: transparent; border: 1px solid #c9c9c9;
         border-radius: 5px; padding: 0 20px; font-size: 16px; color: #000; font-family: inherit;
@@ -646,111 +642,80 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
 
     /* 6. ВЫБОР СВЯЗИ (РАДИО-КНОПКИ) */
     .messenger-selector {
-        display: flex; flex-direction: column; gap: 10px; width: 100%;
+        display: flex; flex-direction: column; 
+        gap: 12px; /* УВЕЛИЧИЛ ОТСТУП, ЧТОБЫ ВЫРОВНЯТЬ С EMAIL */
+        width: 100%;
     }
     .ms-option {
         position: relative; display: block; cursor: pointer; margin: 0; padding: 0;
     }
-    /* Скрываем реальный инпут */
-    .ms-option input {
-        position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;
-    }
+    .ms-option input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+    
     /* Видимая коробка */
     .ms-box {
         display: flex; align-items: center; justify-content: space-between;
         height: 55px; padding: 0 20px;
         border: 1px solid #c9c9c9; border-radius: 5px;
-        transition: 0.2s; font-size: 16px; color: #000; background: #fff;
-        box-sizing: border-box; /* Чтобы padding не менял размер */
+        font-size: 16px; color: #000; background: #fff;
+        box-sizing: border-box;
+        /* УБРАЛ TRANSITION, ЧТОБЫ НЕ МИГАЛО */
     }
-    .ms-box:hover { border-color: #666; }
-
-    /* Кружочек индикатора */
+    
+    /* Кружочек */
     .ms-circle {
         width: 20px; height: 20px;
-        border: 1px solid #c9c9c9; /* Тонкая серая рамка */
-        border-radius: 50%;
-        margin-right: 15px; 
-        position: relative; box-sizing: border-box;
-        flex-shrink: 0;
+        border: 1px solid #c9c9c9; border-radius: 50%;
+        margin-right: 15px; position: relative; box-sizing: border-box; flex-shrink: 0;
     }
     .ms-text { flex-grow: 1; }
 
-    /* АКТИВНОЕ СОСТОЯНИЕ */
+    /* АКТИВНОЕ СОСТОЯНИЕ (Без изменения толщины рамки) */
     .ms-option input:checked + .ms-box {
-        border: 1px solid #c9c9c9; /* Рамка остается такой же (чтобы не дергалось) */
+        border-color: #000; /* Просто меняем цвет, толщина та же 1px */
         background-color: #fff;
     }
-    /* Активный кружок */
     .ms-option input:checked + .ms-box .ms-circle {
-        border-color: #2997ff; /* Синяя рамка */
-        border-width: 1px; 
+        border-color: #2997ff; 
     }
-    /* Синяя точка внутри */
     .ms-option input:checked + .ms-box .ms-circle::after {
-        content: ''; position: absolute;
-        top: 50%; left: 50%; 
-        transform: translate(-50%, -50%); /* Идеальный центр */
-        width: 12px; height: 12px;
-        background-color: #2997ff; 
-        border-radius: 50%;
+        content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 12px; height: 12px; background-color: #2997ff; border-radius: 50%;
     }
 
-    /* 7. ЧЕКБОКС И ТЕКСТ СОГЛАСИЯ */
+    /* 7. ЧЕКБОКС И СОГЛАСИЕ */
     .my-check-group {
         display: flex; align-items: flex-start; 
         font-size: 12px; color: #555; 
-        margin-top: 10px; cursor: pointer;
+        margin-top: 2px; /* ПРИБЛИЗИЛ К ТЕКСТАРЕА (было 10) */
+        cursor: pointer;
     }
     
-    /* Кастомный чекбокс (скрываем родной) */
-    .my-check-group input {
-        position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;
-    }
+    .my-check-group input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
     
-    /* Наш нарисованный чекбокс */
     .custom-check-box {
-        width: 20px; height: 20px; /* Размер 20px */
-        border: 1px solid #000; /* Обводка */
-        border-radius: 4px; /* Скругление */
-        margin-right: 12px;
-        margin-top: 0px; /* Выравнивание с текстом */
-        flex-shrink: 0;
-        position: relative;
-        background: transparent; /* Без заливки */
+        width: 20px; height: 20px; border: 1px solid #000; border-radius: 4px;
+        margin-right: 12px; margin-top: 0px; flex-shrink: 0; position: relative; background: transparent;
     }
-    
-    /* Галочка (появляется при выборе) */
     .custom-check-box::after {
-        content: ''; position: absolute; display: none;
-        left: 6px; top: 2px; width: 5px; height: 10px;
-        border: solid #000; border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
+        content: ''; position: absolute; display: none; left: 6px; top: 2px; width: 5px; height: 10px;
+        border: solid #000; border-width: 0 2px 2px 0; transform: rotate(45deg);
     }
     .my-check-group input:checked ~ .custom-check-box::after { display: block; }
-    
-    /* Ошибка чекбокса */
     .my-check-group.error .custom-check-box { border-color: #ff4d4d; }
     .my-check-group.error span { color: #ff4d4d; }
 
-    /* Мобильный текст согласия */
     @media (max-width: 768px) {
-        .my-check-group { font-size: 14px; line-height: 1.4; } /* Увеличил шрифт */
-        .custom-check-box { width: 24px; height: 24px; margin-top: -2px; } /* Чуть крупнее для пальца */
+        .my-check-group { font-size: 14px; line-height: 1.4; margin-top: 5px; } 
+        .custom-check-box { width: 24px; height: 24px; margin-top: -2px; }
         .custom-check-box::after { left: 8px; top: 4px; width: 6px; height: 11px; }
     }
 
     /* 8. КНОПКА */
     .my-btn-submit {
-        width: 100%; height: 60px; 
-        background: #000; color: #fff; 
-        border: none; border-radius: 5px;
-        font-size: 16px; font-weight: 600; 
-        text-transform: uppercase; letter-spacing: 1px;
-        cursor: pointer; margin-top: 10px; 
-        transition: 0.3s;
-        box-sizing: border-box; /* Чтобы не вылезала */
-        max-width: 100%; /* Защита от вылезания */
+        width: 100%; height: 60px; background: #000; color: #fff; 
+        border: none; border-radius: 5px; font-size: 16px; font-weight: 600; 
+        text-transform: uppercase; letter-spacing: 1px; cursor: pointer; 
+        margin-top: 10px; transition: 0.3s; box-sizing: border-box; max-width: 100%;
     }
     .my-btn-submit:hover { background: #333; transform: translateY(-2px); }
 </style>
@@ -832,7 +797,7 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
                 <!-- Чекбокс -->
                 <label class="my-check-group full-width">
                     <input type="checkbox" id="popup-agree" checked>
-                    <div class="custom-check-box"></div> <!-- Кастомный квадрат -->
+                    <div class="custom-check-box"></div>
                     <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span>
                 </label>
 
