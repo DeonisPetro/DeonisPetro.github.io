@@ -758,7 +758,53 @@ style="display:none;" data-nosnippet
 tabindex="-1"
 aria-label="Ошибки при заполнении формы"> <ul
 role="list"
-class="t-form__errorbox-text t-text t-text_md"> <li class="t-form__errorbox-item js-rule-error js-rule-error-all"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-req"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-email"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-name"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-phone"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-minlength"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-string"></li> </ul> </div> <!--/noindex--> </div> </form> <style>#rec1349454101 input::-webkit-input-placeholder {color:#000000;opacity:0.5;}#rec1349454101 input::-moz-placeholder{color:#000000;opacity:0.5;}#rec1349454101 input:-moz-placeholder {color:#000000;opacity:0.5;}#rec1349454101 input:-ms-input-placeholder{color:#000000;opacity:0.5;}#rec1349454101 textarea::-webkit-input-placeholder {color:#000000;opacity:0.5;}#rec1349454101 textarea::-moz-placeholder{color:#000000;opacity:0.5;}#rec1349454101 textarea:-moz-placeholder {color:#000000;opacity:0.5;}#rec1349454101 textarea:-ms-input-placeholder{color:#000000;opacity:0.5;}</style> </div> </div> </div> </div> <script>t_onReady(function() {t_onFuncLoad('t702_initPopup',function() {t702_initPopup('1349454101');});});</script> </div> <div id="rec1450959101" class="r t-rec" style=" " data-animationappear="off" data-record-type="131"> <!-- T123 --> <div class="t123"> <div class="t-container_100 "> <div class="t-width t-width_100 "> <!-- nominify begin --> <!-- ======================================================== --> <!-- ОБЩИЙ БЛОК СТИЛЕЙ ДЛЯ ВСЕХ МОДИФИКАЦИЙ САЙТА      --> <!-- ======================================================== --> <style>
+class="t-form__errorbox-text t-text t-text_md"> <li class="t-form__errorbox-item js-rule-error js-rule-error-all"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-req"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-email"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-name"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-phone"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-minlength"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-string"></li> </ul> </div> <!--/noindex--> </div> </form>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const popupForm = document.getElementById('popup-form-tg'); // Ищем по вашему новому ID
+    
+    if (popupForm) {
+        const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
+        const TG_CHAT_ID = "-1002935952114";
+
+        popupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = popupForm.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = 'Отправка...';
+
+            // Данные
+            const name = popupForm.querySelector('input[name="Name"]')?.value || '-';
+            const email = popupForm.querySelector('input[name="Email"]')?.value || '-';
+            // Телефон в Тильде часто имеет имя 'Phone'
+            const phone = popupForm.querySelector('input[name="Phone"]')?.value || '-'; 
+            // Или ищем любой инпут с типом tel
+            // const phone = popupForm.querySelector('input[type="tel"]')?.value || '-';
+
+            const text = `<b>🔔 Заявка из ПОПАПА!</b>\n` +
+                         `<b>Имя:</b> ${name}\n` +
+                         `<b>Тел:</b> ${phone}\n` +
+                         `<b>Email:</b> ${email}`;
+
+            fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: TG_CHAT_ID, parse_mode: 'html', text: text })
+            })
+            .then(res => {
+                if (res.ok) window.location.href = 'https://DeonisPetro.github.io/success.html';
+                else { alert('Ошибка отправки'); btn.innerText = originalText; }
+            })
+            .catch(err => {
+                alert('Ошибка сети');
+                btn.innerText = originalText;
+            });
+        });
+    }
+});
+</script>
+<style>#rec1349454101 input::-webkit-input-placeholder {color:#000000;opacity:0.5;}#rec1349454101 input::-moz-placeholder{color:#000000;opacity:0.5;}#rec1349454101 input:-moz-placeholder {color:#000000;opacity:0.5;}#rec1349454101 input:-ms-input-placeholder{color:#000000;opacity:0.5;}#rec1349454101 textarea::-webkit-input-placeholder {color:#000000;opacity:0.5;}#rec1349454101 textarea::-moz-placeholder{color:#000000;opacity:0.5;}#rec1349454101 textarea:-moz-placeholder {color:#000000;opacity:0.5;}#rec1349454101 textarea:-ms-input-placeholder{color:#000000;opacity:0.5;}</style> </div> </div> </div> </div> <script>t_onReady(function() {t_onFuncLoad('t702_initPopup',function() {t702_initPopup('1349454101');});});</script> </div> <div id="rec1450959101" class="r t-rec" style=" " data-animationappear="off" data-record-type="131"> <!-- T123 --> <div class="t123"> <div class="t-container_100 "> <div class="t-width t-width_100 "> <!-- nominify begin --> <!-- ======================================================== --> <!-- ОБЩИЙ БЛОК СТИЛЕЙ ДЛЯ ВСЕХ МОДИФИКАЦИЙ САЙТА      --> <!-- ======================================================== --> <style>
 /* 
   ЛОГИКА 1: "Анти-мерцание" мобильного меню
   (без изменений)
