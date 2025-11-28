@@ -761,31 +761,72 @@ role="list"
 class="t-form__errorbox-text t-text t-text_md"> <li class="t-form__errorbox-item js-rule-error js-rule-error-all"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-req"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-email"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-name"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-phone"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-minlength"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-string"></li> </ul> </div> <!--/noindex--> </div> </form>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const popupForm = document.getElementById('popup-form-tg'); // Ищем по вашему новому ID
+    const popupForm = document.getElementById('popup-form-tg'); 
     
     if (popupForm) {
         const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
         const TG_CHAT_ID = "-1002935952114";
 
+        // Находим поля
+        const phoneInput = popupForm.querySelector('input[type="tel"]') || popupForm.querySelector('input[name="Phone"]');
+        const emailInput = popupForm.querySelector('input[name="Email"]');
+        const checkbox = popupForm.querySelector('input[type="checkbox"]');
+
+        // Подключаем маску (если библиотека IMask уже загружена на странице)
+        if (typeof IMask !== 'undefined' && phoneInput) {
+            IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
+        }
+
         popupForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // 1. ВАЛИДАЦИЯ (ПРОВЕРКИ)
+            
+            // Чекбокс
+            if (checkbox && !checkbox.checked) {
+                alert('Пожалуйста, подтвердите согласие на обработку данных');
+                return;
+            }
+
+            // Телефон (Обязательно)
+            if (!phoneInput || phoneInput.value.length < 11) {
+                alert('Введите корректный номер телефона');
+                if(phoneInput) phoneInput.style.border = '1px solid red';
+                return;
+            }
+            if(phoneInput) phoneInput.style.border = '1px solid #c9c9c9'; // Сброс ошибки
+
+            // Email (Обязательно)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailInput || !emailRegex.test(emailInput.value)) {
+                alert('Введите корректный Email');
+                if(emailInput) emailInput.style.border = '1px solid red';
+                return;
+            }
+            if(emailInput) emailInput.style.border = '1px solid #c9c9c9'; // Сброс ошибки
+
+
+            // 2. ОТПРАВКА
             const btn = popupForm.querySelector('button[type="submit"]');
             const originalText = btn.innerText;
             btn.innerText = 'Отправка...';
 
-            // Данные
-            const name = popupForm.querySelector('input[name="Name"]')?.value || '-';
-            const email = popupForm.querySelector('input[name="Email"]')?.value || '-';
-            // Телефон в Тильде часто имеет имя 'Phone'
-            const phone = popupForm.querySelector('input[name="Phone"]')?.value || '-'; 
-            // Или ищем любой инпут с типом tel
-            // const phone = popupForm.querySelector('input[type="tel"]')?.value || '-';
+            const name = popupForm.querySelector('input[name="Name"]')?.value || 'Не указано';
+            const phone = phoneInput.value;
+            const email = emailInput.value;
+            
+            // Ищем поле "Удобное время" или "Сообщение"
+            // В вашем коде оно называлось "Укажите удобное время..."
+            // Попробуем найти его по типу или тегу, или возьмем все текстовые инпуты кроме имени/почты
+            let extraInfo = '';
+            const timeInput = popupForm.querySelector('input[name*="время"]');
+            if (timeInput) extraInfo = timeInput.value;
 
             const text = `<b>🔔 Заявка из ПОПАПА!</b>\n` +
-                         `<b>Имя:</b> ${name}\n` +
-                         `<b>Тел:</b> ${phone}\n` +
-                         `<b>Email:</b> ${email}`;
+                         `<b>👤 Имя:</b> ${name}\n` +
+                         `<b>📞 Тел:</b> ${phone}\n` +
+                         `<b>📧 Email:</b> ${email}\n` +
+                         `<b>⏰ Время/Инфо:</b> ${extraInfo}`;
 
             fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
                 method: 'POST',
