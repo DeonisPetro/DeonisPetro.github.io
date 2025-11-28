@@ -577,7 +577,7 @@ var textToCopy=clone.textContent.trim();var tooltip=element.querySelector('.copy
 setTimeout(()=>{if(tooltip) {tooltip.innerText='Копировать';tooltip.classList.remove('copied');}},2000);}).catch(function(err) {console.error('Ошибка копирования: ',err);});}
 var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {createTooltip(btn);btn.addEventListener('click',function(e) {if(window.innerWidth>991) {e.preventDefault();copyText(btn);}});btn.addEventListener('mouseleave',function() {var tooltip=btn.querySelector('.copy-tooltip');if(tooltip) {setTimeout(()=>{tooltip.innerText='Копировать';tooltip.classList.remove('copied');},300);}});});});</script> </div> </div> <div class='t396__elem tn-elem But tn-elem__13479232611763791353633' data-elem-id='1763791353633' data-elem-type='text' data-field-top-value="161" data-field-left-value="-40" data-field-height-value="28" data-field-width-value="210" data-field-axisy-value="top" data-field-axisx-value="right" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-textfit-value="autoheight" data-field-fontsize-value="18" data-field-top-res-375-value="55" data-field-left-res-375-value="1078"> <div class='tn-atom'field='tn_text_1763791353633'>Devalliance@yandex.ru</div> </div> <div class='t396__elem tn-elem But tn-elem__13479232611763793044779000001' data-elem-id='1763793044779000001' data-elem-type='text' data-field-top-value="108" data-field-left-value="-40" data-field-height-value="28" data-field-width-value="147" data-field-axisy-value="top" data-field-axisx-value="right" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-textfit-value="autoheight" data-field-fontsize-value="18" data-field-top-res-375-value="8" data-field-left-res-375-value="1057"> <div class='tn-atom'field='tn_text_1763793044779000001'>+ 7 952 745 66 31</div> </div> </div> </div> <script>t_onFuncLoad('t396_initialScale',function() {t396_initialScale('1347923261');});t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('1347923261');});});</script> <!-- /T396 --> </div> <div id="rec1349454101" class="r t-rec" style=" " data-animationappear="off" data-record-type="702"> <!-- T702 --> <div class="t702"> <div
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V7: УМНЫЕ ОШИБКИ) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V9: ФИНАЛЬНЫЕ ШРИФТЫ И ТЕКСТЫ) -->
 <!-- ============================================================== -->
 
 <style>
@@ -610,7 +610,10 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
         font-size: 36px; font-weight: 600; color: #000; text-align: center; 
         margin-bottom: 10px; line-height: 1.2; margin-top: 10px;
     }
-    .my-popup-subtitle { font-size: 16px; color: #666; text-align: center; margin-bottom: 40px; }
+    .my-popup-subtitle { 
+        font-size: 22px; /* УВЕЛИЧИЛ ДЛЯ ПК */
+        color: #666; text-align: center; margin-bottom: 40px; 
+    }
 
     /* 4. СЕТКА ФОРМЫ */
     .my-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; align-items: start; }
@@ -621,12 +624,16 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
         .my-form-grid { grid-template-columns: 1fr; gap: 20px; }
         .my-popup-box { padding: 30px 20px; }
         .my-popup-title { font-size: 24px; margin-top: 30px; padding: 0 10px; }
+        .my-popup-subtitle { font-size: 16px; margin-top: 5px; margin-bottom: 30px; } /* Возвращаем норм размер на мобилке */
         .my-btn-submit { font-size: 14px !important; } 
-        .my-popup-subtitle { margin-top: 5px; margin-bottom: 30px; }
     }
 
     /* 5. ПОЛЯ ВВОДА */
-    .my-label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #000; }
+    .my-label { 
+        display: block; 
+        font-size: 18px; /* УВЕЛИЧИЛ ДЛЯ ПК */
+        font-weight: 500; margin-bottom: 8px; color: #000; 
+    }
     .my-inp-group { margin-bottom: 0; }
     
     .my-inp {
@@ -638,8 +645,11 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
     .my-inp.error { border-color: #ff4d4d; }
     .my-inp-textarea { height: 120px; padding-top: 15px; resize: none; }
     
-    /* Мелкие ошибки под полями */
     .error-msg { color: #ff4d4d; font-size: 12px; margin-top: 5px; display: none; }
+
+    @media (max-width: 768px) {
+        .my-label { font-size: 14px; } /* На мобилке оставляем компактно */
+    }
 
     /* 6. ВЫБОР СВЯЗИ */
     .messenger-selector { display: flex; flex-direction: column; gap: 15px; width: 100%; }
@@ -652,11 +662,14 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
         border: 1px solid #c9c9c9; border-radius: 5px;
         font-size: 16px; color: #000; background: #fff; box-sizing: border-box;
     }
+    /* Подпись (серый текст) */
+    .ms-hint { font-size: 13px; color: #888; margin-left: 5px; }
+
     .ms-circle {
         width: 20px; height: 20px; border: 1px solid #c9c9c9; border-radius: 50%;
         margin-right: 15px; position: relative; box-sizing: border-box; flex-shrink: 0;
     }
-    .ms-text { flex-grow: 1; }
+    .ms-text { flex-grow: 1; display: flex; align-items: center; flex-wrap: wrap; }
 
     .ms-option input:checked + .ms-box { background-color: #fff; border-color: #c9c9c9; }
     .ms-option input:checked + .ms-box .ms-circle { border-color: #c9c9c9; }
@@ -668,7 +681,8 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
     /* 7. ЧЕКБОКС И СОГЛАСИЕ */
     .my-check-group {
         display: flex; align-items: center; 
-        font-size: 12px; color: #555; 
+        font-size: 16px; /* УВЕЛИЧИЛ ДЛЯ ПК */
+        color: #555; 
         margin-top: -5px; 
         cursor: pointer; -webkit-tap-highlight-color: transparent;
     }
@@ -690,9 +704,10 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
         .my-check-group { font-size: 14px; line-height: 1.4; margin-top: -15px; align-items: flex-start; }
         .custom-check-box { width: 24px; height: 24px; margin-top: -2px; }
         .custom-check-box::after { left: 8px; top: 4px; width: 6px; height: 11px; }
+        .ms-hint { display: block; width: 100%; margin-left: 0; margin-top: 2px; font-size: 12px; }
     }
 
-    /* 8. ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ (НОВОЕ) */
+    /* 8. ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ */
     .main-error-alert {
         grid-column: 1 / -1;
         color: #ff4d4d;
@@ -700,19 +715,25 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
         font-size: 14px;
         font-weight: 500;
         margin-top: 15px;
-        display: none; /* Скрыто по умолчанию */
+        margin-bottom: 5px;
+        display: none;
     }
 
     /* 9. КНОПКА */
     .my-btn-submit {
         width: 100%; height: 60px; background: #000; color: #fff; 
-        border: none; border-radius: 5px; font-size: 16px; font-weight: 600; 
+        border: none; border-radius: 5px; 
+        font-size: 18px; /* УВЕЛИЧИЛ ДЛЯ ПК */
+        font-weight: 600; 
         text-transform: uppercase; letter-spacing: 1px; cursor: pointer; 
-        margin-top: 10px; /* Отступ от сообщения об ошибке */
+        margin-top: 15px; 
         transition: 0.2s; box-sizing: border-box; max-width: 100%;
         -webkit-tap-highlight-color: transparent;
     }
-    .my-btn-submit:hover { background: #333; }
+    
+    @media (hover: hover) {
+        .my-btn-submit:hover { background: #333; transform: translateY(-2px); }
+    }
 </style>
 
 <div id="my-custom-popup" class="my-popup-overlay">
@@ -748,18 +769,27 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
                 <div class="my-inp-group">
                     <label class="my-label">Удобный способ связи</label>
                     <div class="messenger-selector">
+                        <!-- Telegram -->
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="Telegram" checked>
-                            <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Telegram</div></div>
+                            <div class="ms-box">
+                                <div class="ms-circle"></div>
+                                <div class="ms-text">
+                                    Telegram <span class="ms-hint">(юзернейм в комментарии)</span>
+                                </div>
+                            </div>
                         </label>
+                        <!-- WhatsApp -->
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="WhatsApp">
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">WhatsApp</div></div>
                         </label>
+                        <!-- E-mail -->
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="Email">
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Почта (E-mail)</div></div>
                         </label>
+                        <!-- Телефон -->
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="Phone">
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Телефон (Звонок)</div></div>
@@ -770,7 +800,7 @@ var buttons=document.querySelectorAll('.But');buttons.forEach(function(btn) {cre
                 <!-- НИЖНЯЯ ЧАСТЬ -->
                 <div class="my-inp-group full-width">
                     <label class="my-label">Комментарий или удобное время</label>
-                    <textarea name="Message" class="my-inp my-inp-textarea" placeholder="Например: звонить после 18:00"></textarea>
+                    <textarea name="Message" class="my-inp my-inp-textarea" placeholder="Например: звонить после 18:00 или @username"></textarea>
                 </div>
 
                 <!-- Чекбокс -->
@@ -817,7 +847,7 @@ document.addEventListener("DOMContentLoaded", function() {
     window.closeMyPopup = function() {
         popup.style.display = 'none';
         document.body.style.overflow = '';
-        // Сброс ошибок при закрытии
+        // Сброс ошибок
         setError(phoneInput, false);
         setError(emailInput, false);
         mainErrorMsg.style.display = 'none';
@@ -842,7 +872,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
-    // Убираем ошибки при вводе (и главное сообщение тоже)
     function clearMainError() { mainErrorMsg.style.display = 'none'; }
     
     phoneInput.addEventListener('input', () => { setError(phoneInput, false); clearMainError(); });
@@ -857,7 +886,6 @@ document.addEventListener("DOMContentLoaded", function() {
         e.preventDefault();
         let hasError = false;
 
-        // Валидация
         if (mask.unmaskedValue.length < 11) { setError(phoneInput, true); hasError = true; }
         
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -865,13 +893,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (!checkbox.checked) { checkbox.closest('label').classList.add('error'); hasError = true; }
 
-        // Если есть ошибки
         if (hasError) {
-            mainErrorMsg.style.display = 'block'; // Показываем красную надпись
-            return; // И СРАЗУ ВЫХОДИМ. Кнопка НЕ меняет цвет.
+            mainErrorMsg.style.display = 'block';
+            return;
         }
 
-        // Если ошибок НЕТ -> Меняем кнопку на "Отправка"
+        // Успех: меняем кнопку
         const originalText = btn.innerText;
         btn.innerText = 'Отправка...';
         btn.style.opacity = '0.7';
@@ -900,14 +927,12 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(res => {
             if (res.ok) window.location.href = 'https://DeonisPetro.github.io/success.html';
             else { 
-                // Ошибка API
                 mainErrorMsg.innerText = 'Ошибка отправки. Попробуйте позже.';
                 mainErrorMsg.style.display = 'block';
                 btn.innerText = originalText; btn.style.opacity = '1'; 
             }
         })
         .catch(err => {
-            // Ошибка Сети
             mainErrorMsg.innerText = 'Ошибка сети. Проверьте интернет.';
             mainErrorMsg.style.display = 'block';
             btn.innerText = originalText; btn.style.opacity = '1';
