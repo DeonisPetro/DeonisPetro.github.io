@@ -760,71 +760,78 @@ aria-label="Ошибки при заполнении формы"> <ul
 role="list"
 class="t-form__errorbox-text t-text t-text_md"> <li class="t-form__errorbox-item js-rule-error js-rule-error-all"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-req"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-email"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-name"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-phone"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-minlength"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-string"></li> </ul> </div> <!--/noindex--> </div> </form>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const popupForm = document.getElementById('popup-form-tg'); 
-    // Ищем кнопку (по ID или классу)
-    const btn = document.getElementById('popup-btn-tg') || popupForm.querySelector('button');
+document.addEventListener("click", function(e) {
+    // Проверяем, был ли клик по нашей кнопке (или внутри неё)
+    const target = e.target.closest('#popup-btn-tg');
+    
+    if (target) {
+        // Останавливаем всё, что могла бы сделать Тильда
+        e.preventDefault();
+        e.stopPropagation();
 
-    if (popupForm && btn) {
+        // Ищем форму ОТНОСИТЕЛЬНО кнопки (самый надежный способ)
+        const popupForm = target.closest('form');
+        if (!popupForm) return;
+
+        // 1. ПРОВЕРКА ВАЛИДНОСТИ
+        if (!popupForm.reportValidity()) {
+            return; // Браузер покажет ошибки
+        }
+
+        // 2. ДОП ПРОВЕРКИ
+        const phoneInput = popupForm.querySelector('input[type="tel"]') || popupForm.querySelector('input[name="Phone"]');
+        if (phoneInput && phoneInput.value.length < 11) {
+            alert('Введите корректный телефон');
+            return;
+        }
+
+        // 3. ОТПРАВКА
+        const btn = target;
+        const originalText = btn.innerText;
+        btn.innerText = 'Отправка...';
+
         const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
         const TG_CHAT_ID = "-1002935952114";
 
-        // Маска
-        const phoneInput = popupForm.querySelector('input[type="tel"]') || popupForm.querySelector('input[name="Phone"]');
-        if (typeof IMask !== 'undefined' && phoneInput) {
-            IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
-        }
+        const name = popupForm.querySelector('input[name="Name"]')?.value || '-';
+        const email = popupForm.querySelector('input[name="Email"]')?.value || '-';
+        const phone = phoneInput ? phoneInput.value : '-';
+        
+        let extraInfo = '';
+        const timeInput = popupForm.querySelector('input[name*="время"]');
+        if (timeInput) extraInfo = timeInput.value;
+        
+        const messengerInput = popupForm.querySelector('input[name="messenger-type"]:checked');
+        const messenger = messengerInput ? messengerInput.value : '-';
 
-        // КЛИК ПО КНОПКЕ
-        btn.addEventListener('click', function(e) {
-            e.preventDefault(); // На всякий случай
+        const text = `<b>🔔 Заявка из ПОПАПА!</b>\n` +
+                     `<b>👤 Имя:</b> ${name}\n` +
+                     `<b>📞 Тел:</b> ${phone}\n` +
+                     `<b>📧 Email:</b> ${email}\n` +
+                     `<b>💬 Связь:</b> ${messenger}\n` +
+                     `<b>⏰ Инфо:</b> ${extraInfo}`;
 
-            // 1. ПРИНУДИТЕЛЬНАЯ ПРОВЕРКА ВАЛИДНОСТИ
-            // Это заставит браузер показать "облачка" ошибок, если поля пустые
-            if (!popupForm.reportValidity()) {
-                return; // Если есть ошибки, выходим. Браузер уже всё показал.
-            }
-
-            // 2. Доп. проверка телефона (так как required проверяет только наличие, а не длину)
-            if (phoneInput && phoneInput.value.length < 11) {
-                alert('Введите полный номер телефона'); 
-                return;
-            }
-
-            // 3. ОТПРАВКА
-            const originalText = btn.innerText;
-            btn.innerText = 'Отправка...';
-
-            const name = popupForm.querySelector('input[name="Name"]')?.value || '-';
-            const email = popupForm.querySelector('input[name="Email"]')?.value || '-';
-            const phone = phoneInput ? phoneInput.value : '-';
-            
-            let extraInfo = '';
-            const timeInput = popupForm.querySelector('input[name*="время"]');
-            if (timeInput) extraInfo = timeInput.value;
-            const messenger = popupForm.querySelector('input[name="messenger-type"]:checked')?.value || '-';
-
-            const text = `<b>🔔 Заявка из ПОПАПА!</b>\n` +
-                         `<b>👤 Имя:</b> ${name}\n` +
-                         `<b>📞 Тел:</b> ${phone}\n` +
-                         `<b>📧 Email:</b> ${email}\n` +
-                         `<b>💬 Связь:</b> ${messenger}\n` +
-                         `<b>⏰ Инфо:</b> ${extraInfo}`;
-
-            fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: TG_CHAT_ID, parse_mode: 'html', text: text })
-            })
-            .then(res => {
-                if (res.ok) window.location.href = 'https://DeonisPetro.github.io/success.html';
-                else { alert('Ошибка отправки'); btn.innerText = originalText; }
-            })
-            .catch(err => {
-                alert('Ошибка сети');
-                btn.innerText = originalText;
-            });
+        fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TG_CHAT_ID, parse_mode: 'html', text: text })
+        })
+        .then(res => {
+            if (res.ok) window.location.href = 'https://DeonisPetro.github.io/success.html';
+            else { alert('Ошибка отправки'); btn.innerText = originalText; }
+        })
+        .catch(err => {
+            alert('Ошибка сети');
+            btn.innerText = originalText;
         });
+    }
+});
+
+// Инициализация маски (отдельно)
+document.addEventListener("DOMContentLoaded", function() {
+    const phoneInput = document.querySelector('#popup-form-tg input[type="tel"]');
+    if (typeof IMask !== 'undefined' && phoneInput) {
+        IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
     }
 });
 </script>
