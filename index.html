@@ -261,6 +261,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         /* --- ОБЩИЕ СТИЛИ --- */
         .custom-form-zero {
             width: 450px;
+            margin-top: -10px; /* Поднимаем форму выше на 10px */
             font-family: 'Montserrat', Arial, sans-serif;
             color: #ffffff;
             text-align: left;
@@ -278,7 +279,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         .form-label {
             display: block;
             margin-bottom: 8px;
-            font-size: 16px;
+            font-size: 16px; /* Стандарт 16px */
             font-weight: 400;
             color: #ffffff;
             font-family: 'Montserrat', sans-serif;
@@ -291,13 +292,12 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             /* ФОН: Черный 1%, Блюр 10px */
             background: rgba(0, 0, 0, 0.01);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Для iPhone */
+            -webkit-backdrop-filter: blur(10px);
             
             border: 1px solid #ffffff;
-            border-radius: 7px; /* Скругление 7px */
+            border-radius: 7px;
             color: #ffffff;
             
-            /* ШРИФТ: Montserrat 16px */
             font-family: 'Montserrat', sans-serif;
             font-size: 16px;
             font-weight: 400;
@@ -325,6 +325,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             border-color: #ff4d4d;
         }
 
+        /* Высота полей (Десктоп) */
         .input-standard { height: 50px; }
         .input-textarea { 
             height: 100px; 
@@ -332,17 +333,17 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             resize: none; 
         }
 
-        /* --- КНОПКА (Стиль как у полей) --- */
+        /* --- КНОПКА --- */
         .submit-btn {
             width: 100%;
-            max-width: 180px;
+            max-width: 180px; /* Ограничение на ПК */
             height: 50px;
             
             background: rgba(0, 0, 0, 0.01);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             
-            border: 1px solid #ffffff;
+            border: 1px solid #ffffff; /* Белая обводка всегда */
             border-radius: 7px;
             
             color: #ffffff;
@@ -356,8 +357,8 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             z-index: 10000;
         }
         .submit-btn:hover {
-            background: #353535; /* Ховер цвет */
-            border-color: #353535;
+            background: #353535; /* Меняем только фон */
+            /* border-color не меняем, остается белым */
         }
 
         /* --- ЧЕКБОКС --- */
@@ -388,8 +389,8 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             height: 20px;
             width: 20px;
             background-color: transparent;
-            border: 1px solid #ffffff; /* Белая обводка */
-            border-radius: 1px; /* Скругление 1px */
+            border: 1px solid #ffffff;
+            border-radius: 2px; /* Явное скругление */
             margin-right: 15px;
             flex-shrink: 0;
         }
@@ -414,19 +415,29 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         /* --- МОБИЛЬНАЯ ВЕРСИЯ (до 560px) --- */
         @media screen and (max-width: 560px) {
             .custom-form-zero {
-                width: 100% !important; 
-                padding-left: 20px;  /* Отступы слева */
-                padding-right: 20px; /* Отступы справа */
+                width: 100% !important;
+                padding-left: 20px;
+                padding-right: 20px;
+                margin-top: -5px; /* Чуть меньше подъем на мобилке */
             }
             
+            .form-label {
+                font-size: 16px !important; /* Принудительно 16px */
+            }
+            
+            /* Уменьшенные поля */
+            .input-standard { height: 40px; }
+            .input-textarea { height: 80px; }
+            
             .submit-btn {
-                max-width: 100%; 
+                max-width: 100%; /* Снимаем ограничение */
+                width: 100%;     /* Растягиваем как поля */
                 display: block;
-                margin: 0 auto; /* Кнопка по центру */
+                margin: 0 auto;
             }
             
             .checkbox-group {
-                margin-bottom: 20px; /* Отступ от кнопки 20px */
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -461,30 +472,29 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
     <button type="submit" class="submit-btn">Отправить</button>
 </form>
 
-<!-- СКРИПТЫ (Один раз, без дублей!) -->
+<!-- СКРИПТЫ -->
 <script src="https://unpkg.com/imask"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.querySelector('.custom-form-zero');
-        // Защита, если форма еще не прогрузилась
         if(!form) return;
 
         const phoneInput = form.querySelector('input[name="Phone"]');
         const emailInput = form.querySelector('input[name="Email"]');
         const btn = form.querySelector('.submit-btn');
 
-        // 1. Маска телефона
+        // МАСКА
         const mask = IMask(phoneInput, {
             mask: '+{7} (000) 000-00-00',
             lazy: false,
             placeholderChar: '_' 
         });
 
-        // 2. Обработка отправки
+        // ОТПРАВКА
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Блокируем стандартную отправку
+            e.preventDefault();
 
-            // Валидация телефона
+            // Валидация
             if (mask.unmaskedValue.length < 11) {
                 alert('Пожалуйста, введите корректный номер телефона');
                 phoneInput.style.borderColor = '#ff4d4d';
@@ -492,7 +502,6 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             }
             phoneInput.style.borderColor = '#ffffff';
 
-            // Валидация Email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(emailInput.value)) {
                 alert('Пожалуйста, проверьте Email');
@@ -501,7 +510,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             }
             emailInput.style.borderColor = '#ffffff';
 
-            // Если всё ОК - отправляем
+            // Ajax
             const originalText = btn.innerText;
             btn.innerText = 'Отправка...';
             btn.style.opacity = '0.7';
@@ -521,7 +530,6 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             });
         });
 
-        // Сброс красной рамки при вводе
         phoneInput.addEventListener('input', () => phoneInput.style.borderColor = '#ffffff');
         emailInput.addEventListener('input', () => emailInput.style.borderColor = '#ffffff');
     });
