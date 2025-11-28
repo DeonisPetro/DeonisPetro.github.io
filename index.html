@@ -752,7 +752,7 @@ aria-label="Ошибки при заполнении формы"> <ul
 role="list"
 class="t-form__errorbox-text t-text t-text_md"> <li class="t-form__errorbox-item js-rule-error js-rule-error-all"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-req"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-email"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-name"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-phone"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-minlength"></li> <li class="t-form__errorbox-item js-rule-error js-rule-error-string"></li> </ul> </div> <!--/noindex--> </div> <div class="t-form__submit"> <button
 class="t-submit t-btnflex t-btnflex_type_submit t-btnflex_md"
-type="submit"> <span class="t-btnflex__text">Получить расчет и план работ</span> <style>#rec1349454101 .t-btnflex.t-btnflex_type_submit {color:#ffffff;background-color:#000000;border-style:none !important;border-radius:5px;box-shadow:none !important;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}</style> </button> </div> </div> <div class="t-form__errorbox-bottom"> <!--noindex--> <div
+type="button" id="popup-btn-tg"> <span class="t-btnflex__text">Получить расчет и план работ</span> <style>#rec1349454101 .t-btnflex.t-btnflex_type_submit {color:#ffffff;background-color:#000000;border-style:none !important;border-radius:5px;box-shadow:none !important;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}</style> </button> </div> </div> <div class="t-form__errorbox-bottom"> <!--noindex--> <div
 class="js-errorbox-all t-form__errorbox-wrapper"
 style="display:none;" data-nosnippet
 tabindex="-1"
@@ -762,41 +762,36 @@ class="t-form__errorbox-text t-text t-text_md"> <li class="t-form__errorbox-item
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const popupForm = document.getElementById('popup-form-tg'); 
-    
-    if (popupForm) {
+    // Ищем кнопку (по ID или классу)
+    const btn = document.getElementById('popup-btn-tg') || popupForm.querySelector('button');
+
+    if (popupForm && btn) {
         const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
         const TG_CHAT_ID = "-1002935952114";
 
-        // Маска (если нужна)
+        // Маска
         const phoneInput = popupForm.querySelector('input[type="tel"]') || popupForm.querySelector('input[name="Phone"]');
         if (typeof IMask !== 'undefined' && phoneInput) {
             IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
         }
 
-        const btn = popupForm.querySelector('button[type="submit"]');
+        // КЛИК ПО КНОПКЕ
+        btn.addEventListener('click', function(e) {
+            e.preventDefault(); // На всякий случай
 
-        // ВАЖНО: Вешаем на SUBMIT, но проверяем валидность вручную
-        popupForm.addEventListener('submit', function(e) {
-            
-            // 1. Если форма НЕ валидна (есть пустые required поля)
-            if (!popupForm.checkValidity()) {
-                // Мы НЕ отменяем событие (не делаем e.preventDefault())
-                // Пусть браузер сам покажет ошибки и остановит отправку.
-                // Но чтобы наш скрипт отправки в ТГ не сработал, мы делаем return
-                return; 
+            // 1. ПРИНУДИТЕЛЬНАЯ ПРОВЕРКА ВАЛИДНОСТИ
+            // Это заставит браузер показать "облачка" ошибок, если поля пустые
+            if (!popupForm.reportValidity()) {
+                return; // Если есть ошибки, выходим. Браузер уже всё показал.
             }
 
-            // 2. Если форма ВАЛИДНА -> Браузер готов её отправить (перезагрузить страницу)
-            // Вот тут мы ВМЕШИВАЕМСЯ
-            e.preventDefault(); // Отменяем перезагрузку/стандартную отправку
-            
-            // Дополнительная ручная проверка телефона (если нужно строже)
+            // 2. Доп. проверка телефона (так как required проверяет только наличие, а не длину)
             if (phoneInput && phoneInput.value.length < 11) {
-                alert('Введите корректный телефон'); // Или красим рамку
+                alert('Введите полный номер телефона'); 
                 return;
             }
 
-            // ОТПРАВЛЯЕМ В ТЕЛЕГРАМ
+            // 3. ОТПРАВКА
             const originalText = btn.innerText;
             btn.innerText = 'Отправка...';
 
