@@ -767,33 +767,39 @@ document.addEventListener("DOMContentLoaded", function() {
         const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
         const TG_CHAT_ID = "-1002935952114";
 
-        // Маска (оставляем, она не мешает)
+        // Маска (если нужна)
         const phoneInput = popupForm.querySelector('input[type="tel"]') || popupForm.querySelector('input[name="Phone"]');
         if (typeof IMask !== 'undefined' && phoneInput) {
             IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
         }
 
-        // Кнопка отправки
         const btn = popupForm.querySelector('button[type="submit"]');
 
-        // Обработчик клика (вместо submit)
-        btn.addEventListener('click', function(e) {
-            // 1. ПРОВЕРКА ВАЛИДНОСТИ БРАУЗЕРОМ
-            // checkValidity() вызовет стандартные браузерные подсказки ("Заполните это поле")
-            // и подсветит поля, если у них стоит атрибут required
+        // ВАЖНО: Вешаем на SUBMIT, но проверяем валидность вручную
+        popupForm.addEventListener('submit', function(e) {
+            
+            // 1. Если форма НЕ валидна (есть пустые required поля)
             if (!popupForm.checkValidity()) {
-                // Если форма не валидна, мы ничего не делаем. 
-                // Браузер сам покажет ошибки.
+                // Мы НЕ отменяем событие (не делаем e.preventDefault())
+                // Пусть браузер сам покажет ошибки и остановит отправку.
+                // Но чтобы наш скрипт отправки в ТГ не сработал, мы делаем return
                 return; 
             }
 
-            // 2. Если всё ОК -> Отменяем стандартную отправку и шлем в ТГ
-            e.preventDefault();
+            // 2. Если форма ВАЛИДНА -> Браузер готов её отправить (перезагрузить страницу)
+            // Вот тут мы ВМЕШИВАЕМСЯ
+            e.preventDefault(); // Отменяем перезагрузку/стандартную отправку
             
+            // Дополнительная ручная проверка телефона (если нужно строже)
+            if (phoneInput && phoneInput.value.length < 11) {
+                alert('Введите корректный телефон'); // Или красим рамку
+                return;
+            }
+
+            // ОТПРАВЛЯЕМ В ТЕЛЕГРАМ
             const originalText = btn.innerText;
             btn.innerText = 'Отправка...';
 
-            // Сбор данных
             const name = popupForm.querySelector('input[name="Name"]')?.value || '-';
             const email = popupForm.querySelector('input[name="Email"]')?.value || '-';
             const phone = phoneInput ? phoneInput.value : '-';
