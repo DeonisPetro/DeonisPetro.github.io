@@ -261,7 +261,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         /* --- ОБЩИЕ СТИЛИ --- */
         .custom-form-zero {
             width: 450px;
-            margin-top: -10px; /* Поднимаем форму выше на 10px */
+            margin-top: -10px; 
             font-family: 'Montserrat', Arial, sans-serif;
             color: #ffffff;
             text-align: left;
@@ -279,7 +279,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         .form-label {
             display: block;
             margin-bottom: 8px;
-            font-size: 16px; /* Стандарт 16px */
+            font-size: 16px;
             font-weight: 400;
             color: #ffffff;
             font-family: 'Montserrat', sans-serif;
@@ -289,7 +289,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             width: 100%;
             box-sizing: border-box;
             
-            /* ФОН: Черный 1%, Блюр 10px */
+            /* Фон: черный 1%, блюр 10px */
             background: rgba(0, 0, 0, 0.01);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -345,6 +345,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             
             border: 1px solid #ffffff; /* Белая обводка всегда */
             border-radius: 7px;
+            box-sizing: border-box; /* ИСПРАВЛЕНИЕ: Рамка внутри ширины */
             
             color: #ffffff;
             font-family: 'Montserrat', sans-serif;
@@ -358,7 +359,6 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         }
         .submit-btn:hover {
             background: #353535; /* Меняем только фон */
-            /* border-color не меняем, остается белым */
         }
 
         /* --- ЧЕКБОКС --- */
@@ -390,7 +390,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             width: 20px;
             background-color: transparent;
             border: 1px solid #ffffff;
-            border-radius: 2px; /* Явное скругление */
+            border-radius: 3px; /* СКРУГЛЕНИЕ 3px */
             margin-right: 15px;
             flex-shrink: 0;
         }
@@ -416,13 +416,13 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         @media screen and (max-width: 560px) {
             .custom-form-zero {
                 width: 100% !important;
-                padding-left: 20px;
-                padding-right: 20px;
-                margin-top: -5px; /* Чуть меньше подъем на мобилке */
+                padding-left: 10px;  /* Отступ 10px */
+                padding-right: 10px; /* Отступ 10px */
+                margin-top: -5px;
             }
             
             .form-label {
-                font-size: 16px !important; /* Принудительно 16px */
+                font-size: 16px !important;
             }
             
             /* Уменьшенные поля */
@@ -430,8 +430,8 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             .input-textarea { height: 80px; }
             
             .submit-btn {
-                max-width: 100%; /* Снимаем ограничение */
-                width: 100%;     /* Растягиваем как поля */
+                max-width: 100%;
+                width: 100%;
                 display: block;
                 margin: 0 auto;
             }
@@ -464,7 +464,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
     </div>
 
     <label class="checkbox-group">
-        <input type="checkbox" required checked>
+        <input type="checkbox" id="agree-checkbox" required checked>
         <span class="checkmark"></span>
         <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span>
     </label>
@@ -482,6 +482,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         const phoneInput = form.querySelector('input[name="Phone"]');
         const emailInput = form.querySelector('input[name="Email"]');
         const btn = form.querySelector('.submit-btn');
+        const checkbox = form.querySelector('#agree-checkbox'); // Находим чекбокс
 
         // МАСКА
         const mask = IMask(phoneInput, {
@@ -494,7 +495,13 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Валидация
+            // Проверка чекбокса (Ручная защита)
+            if (!checkbox.checked) {
+                alert('Пожалуйста, подтвердите согласие на обработку данных');
+                return;
+            }
+
+            // Валидация телефона
             if (mask.unmaskedValue.length < 11) {
                 alert('Пожалуйста, введите корректный номер телефона');
                 phoneInput.style.borderColor = '#ff4d4d';
@@ -502,6 +509,7 @@ aria-label='' role="img"> </div> </div> <div class='t396__elem tn-elem my-custom
             }
             phoneInput.style.borderColor = '#ffffff';
 
+            // Валидация Email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(emailInput.value)) {
                 alert('Пожалуйста, проверьте Email');
