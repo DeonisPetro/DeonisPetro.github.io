@@ -795,7 +795,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V13: BUTTON UP 20PX + TELEGRAM TEXT + GAP FIX) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V14: HARD FIX - BTN UP, GAP ZERO, TELEGRAM TEXT) -->
 <!-- ============================================================== -->
 
 <style>
@@ -909,12 +909,13 @@ document.addEventListener("DOMContentLoaded", function() {
     .my-check-group.error .custom-check-box { border-color: #ff4d4d; }
     .my-check-group.error span { color: #ff4d4d; }
 
-    /* 8. ОБЕРТКА ДЛЯ КНОПКИ */
+    /* 8. ОБЕРТКА ДЛЯ КНОПКИ (ЖЕСТКИЙ ПОДЪЕМ) */
     .submit-wrapper {
-        margin-top: -5px; /* ИЗМЕНЕНО: Подняли кнопку на 20px (было 15px, стало -5px) */
+        margin-top: -25px !important; /* ИЗМЕНЕНО: Поднял на 25px вверх */
+        position: relative;
     }
 
-    /* ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ (ПОД КНОПКОЙ) */
+    /* ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ (ПРИЖАТО К КНОПКЕ) */
     .main-error-alert {
         color: #ff4d4d;
         text-align: center;
@@ -923,7 +924,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
         height: 20px; 
         line-height: 1.2;
-        margin-top: 1px; /* ИЗМЕНЕНО: Минимальный отступ от кнопки (в 3 раза меньше чем было) */
+        margin-top: -5px; /* ИЗМЕНЕНО: Отрицательный отступ, чтобы прижать к кнопке */
+        padding-bottom: 5px;
         opacity: 0; 
         transition: opacity 0.2s;
     }
@@ -1004,7 +1006,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="messenger-selector">
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="Telegram" checked>
-                            <!-- ИЗМЕНЕНО: Текст Telegram -->
+                            <!-- ИЗМЕНЕНО: Текст Telegram с пояснением в скобках -->
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Telegram (укажите ссылку в комментарии)</div></div>
                         </label>
                         <label class="ms-option">
