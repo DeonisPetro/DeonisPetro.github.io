@@ -795,7 +795,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V12: ERROR 5PX GAP + CHECKBOX UP + PHONE FIX) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V13: BUTTON UP 20PX + TELEGRAM TEXT + GAP FIX) -->
 <!-- ============================================================== -->
 
 <style>
@@ -892,7 +892,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .my-check-group {
         display: flex; align-items: center; 
         font-size: 12px; color: #555; 
-        margin-top: -15px; /* ИЗМЕНЕНО: Подняли на 10px вверх для всех (было -5px) */
+        margin-top: -15px; 
         cursor: pointer; -webkit-tap-highlight-color: transparent;
     }
     .my-check-group input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
@@ -911,7 +911,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* 8. ОБЕРТКА ДЛЯ КНОПКИ */
     .submit-wrapper {
-        margin-top: 15px; 
+        margin-top: -5px; /* ИЗМЕНЕНО: Подняли кнопку на 20px (было 15px, стало -5px) */
     }
 
     /* ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ (ПОД КНОПКОЙ) */
@@ -923,7 +923,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         height: 20px; 
         line-height: 1.2;
-        margin-top: 5px; /* ИЗМЕНЕНО: 5px отступ от кнопки */
+        margin-top: 1px; /* ИЗМЕНЕНО: Минимальный отступ от кнопки (в 3 раза меньше чем было) */
         opacity: 0; 
         transition: opacity 0.2s;
     }
@@ -948,10 +948,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .main-error-alert { font-size: 16px; height: auto; }
         .my-btn-submit:hover { background: #333; transform: translateY(-2px); }
         
-        /* ИЗМЕНЕНО: Поднимаем чекбокс ЕЩЕ сильнее для ПК (было -10px, стало -20px) */
         .my-check-group { margin-top: -20px; }
 
-        /* ИЗМЕНЕНО: Опускаем последнюю радиокнопку на 1px вниз (4-й элемент) */
         .messenger-selector .ms-option:nth-child(4) {
             top: 1px; 
         }
@@ -965,7 +963,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .my-btn-submit { font-size: 14px !important; } 
         .my-popup-subtitle { margin-top: 5px; margin-bottom: 30px; }
         
-        .my-check-group { font-size: 14px; line-height: 1.4; margin-top: -15px; align-items: flex-start; } /* Здесь тоже поднято (-15px) */
+        .my-check-group { font-size: 14px; line-height: 1.4; margin-top: -15px; align-items: flex-start; }
         .custom-check-box { width: 24px; height: 24px; margin-top: -2px; }
         .custom-check-box::after { left: 8px; top: 4px; width: 6px; height: 11px; }
     }
@@ -1006,7 +1004,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="messenger-selector">
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="Telegram" checked>
-                            <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Telegram</div></div>
+                            <!-- ИЗМЕНЕНО: Текст Telegram -->
+                            <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Telegram (укажите ссылку в комментарии)</div></div>
                         </label>
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="WhatsApp">
@@ -1016,7 +1015,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             <input type="radio" name="Messenger" value="Email">
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Почта (E-mail)</div></div>
                         </label>
-                        <!-- Последний элемент, который опустится на 1px на ПК -->
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="Phone">
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Телефон (Звонок)</div></div>
