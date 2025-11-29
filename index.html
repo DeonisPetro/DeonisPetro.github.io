@@ -795,7 +795,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V11: ERROR BELOW BUTTON + GAP 18PX) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V12: ERROR 5PX GAP + CHECKBOX UP + PHONE FIX) -->
 <!-- ============================================================== -->
 
 <style>
@@ -864,7 +864,7 @@ document.addEventListener("DOMContentLoaded", function() {
     /* 6. ВЫБОР СВЯЗИ */
     .messenger-selector { 
         display: flex; flex-direction: column; width: 100%; 
-        gap: 18px; /* ИЗМЕНЕНО: Расстояние между радиокнопками 18px */
+        gap: 18px; 
     }
     .ms-option { position: relative; display: block; cursor: pointer; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     .ms-option input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
@@ -892,7 +892,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .my-check-group {
         display: flex; align-items: center; 
         font-size: 12px; color: #555; 
-        margin-top: -5px; 
+        margin-top: -15px; /* ИЗМЕНЕНО: Подняли на 10px вверх для всех (было -5px) */
         cursor: pointer; -webkit-tap-highlight-color: transparent;
     }
     .my-check-group input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
@@ -909,7 +909,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .my-check-group.error .custom-check-box { border-color: #ff4d4d; }
     .my-check-group.error span { color: #ff4d4d; }
 
-    /* 8. ОБЕРТКА ДЛЯ КНОПКИ (статичная) */
+    /* 8. ОБЕРТКА ДЛЯ КНОПКИ */
     .submit-wrapper {
         margin-top: 15px; 
     }
@@ -921,14 +921,14 @@ document.addEventListener("DOMContentLoaded", function() {
         font-weight: 500;
         font-size: 12px; /* Мобильный */
         
-        height: 20px; /* Фиксированная высота резерва под ошибку */
-        line-height: 20px;
-        margin-top: 5px;
-        opacity: 0; /* Скрыта прозрачностью, но занимает место */
+        height: 20px; 
+        line-height: 1.2;
+        margin-top: 5px; /* ИЗМЕНЕНО: 5px отступ от кнопки */
+        opacity: 0; 
         transition: opacity 0.2s;
     }
     .main-error-alert.show {
-        opacity: 1; /* Показываем */
+        opacity: 1; 
     }
 
     /* 9. КНОПКА */
@@ -945,11 +945,16 @@ document.addEventListener("DOMContentLoaded", function() {
     @media (min-width: 769px) {
         .my-label { font-size: 18px; }
         .my-popup-subtitle { font-size: 22px; }
-        .main-error-alert { font-size: 16px; height: 24px; line-height: 24px; }
+        .main-error-alert { font-size: 16px; height: auto; }
         .my-btn-submit:hover { background: #333; transform: translateY(-2px); }
         
-        /* ИЗМЕНЕНО: Поднимаем чекбокс на 10px */
-        .my-check-group { margin-top: -10px; }
+        /* ИЗМЕНЕНО: Поднимаем чекбокс ЕЩЕ сильнее для ПК (было -10px, стало -20px) */
+        .my-check-group { margin-top: -20px; }
+
+        /* ИЗМЕНЕНО: Опускаем последнюю радиокнопку на 1px вниз (4-й элемент) */
+        .messenger-selector .ms-option:nth-child(4) {
+            top: 1px; 
+        }
     }
 
     /* МОБИЛЬНАЯ ВЕРСИЯ */
@@ -960,7 +965,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .my-btn-submit { font-size: 14px !important; } 
         .my-popup-subtitle { margin-top: 5px; margin-bottom: 30px; }
         
-        .my-check-group { font-size: 14px; line-height: 1.4; margin-top: -5px; align-items: flex-start; }
+        .my-check-group { font-size: 14px; line-height: 1.4; margin-top: -15px; align-items: flex-start; } /* Здесь тоже поднято (-15px) */
         .custom-check-box { width: 24px; height: 24px; margin-top: -2px; }
         .custom-check-box::after { left: 8px; top: 4px; width: 6px; height: 11px; }
     }
@@ -1011,6 +1016,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <input type="radio" name="Messenger" value="Email">
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Почта (E-mail)</div></div>
                         </label>
+                        <!-- Последний элемент, который опустится на 1px на ПК -->
                         <label class="ms-option">
                             <input type="radio" name="Messenger" value="Phone">
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Телефон (Звонок)</div></div>
@@ -1035,7 +1041,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="full-width submit-wrapper">
                     <button type="submit" class="my-btn-submit">Получить расчет и план работ</button>
                     
-                    <!-- ОШИБКА СНИЗУ (занимает место, но невидима) -->
+                    <!-- ОШИБКА СНИЗУ -->
                     <div class="main-error-alert" id="main-error-msg">
                         Пожалуйста, проверьте правильность заполнения полей
                     </div>
