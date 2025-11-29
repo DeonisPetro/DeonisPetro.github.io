@@ -795,7 +795,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V9: STATIC LAYOUT + PC FONTS FIX)   -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V10: ERROR ABOVE BUTTON + GAP 17PX) -->
 <!-- ============================================================== -->
 
 <style>
@@ -830,8 +830,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     .my-popup-subtitle { 
         color: #666; text-align: center; margin-bottom: 40px; 
-        /* По умолчанию (мобильный) */
-        font-size: 16px; 
+        font-size: 16px; /* Мобильный */
     }
 
     /* 4. СЕТКА ФОРМЫ */
@@ -839,16 +838,11 @@ document.addEventListener("DOMContentLoaded", function() {
     .full-width { grid-column: 1 / -1; }
 
     /* 5. ПОЛЯ ВВОДА */
-    .my-inp-group { 
-        /* Добавляем relative для абсолютного позиционирования ошибок */
-        position: relative; 
-        margin-bottom: 0;
-    }
+    .my-inp-group { position: relative; margin-bottom: 0; }
     
     .my-label { 
         display: block; font-weight: 500; margin-bottom: 8px; color: #000; 
-        /* По умолчанию (мобильный) */
-        font-size: 14px; 
+        font-size: 14px; /* Мобильный */
     }
     
     .my-inp {
@@ -863,13 +857,15 @@ document.addEventListener("DOMContentLoaded", function() {
     /* ОШИБКИ ПОД ПОЛЯМИ (СТАТИЧНЫЕ) */
     .error-msg { 
         color: #ff4d4d; font-size: 12px; 
-        position: absolute; /* Абсолютное позиционирование, чтобы не сдвигать поля */
-        bottom: -18px; left: 0;
+        position: absolute; bottom: -18px; left: 0;
         display: none; 
     }
 
     /* 6. ВЫБОР СВЯЗИ */
-    .messenger-selector { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+    .messenger-selector { 
+        display: flex; flex-direction: column; width: 100%; 
+        gap: 17px; /* ИЗМЕНЕНО: Было 15px, стало 17px */
+    }
     .ms-option { position: relative; display: block; cursor: pointer; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     .ms-option input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
     
@@ -915,8 +911,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* 8. ОБЕРТКА ДЛЯ КНОПКИ И ОШИБКИ */
     .submit-wrapper {
-        position: relative; /* Чтобы ошибка позиционировалась относительно этого блока */
-        margin-top: 15px; /* Чуть подняли кнопку (было больше) */
+        position: relative; 
+        margin-top: 25px; /* Место для ошибки над кнопкой */
     }
 
     /* ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ */
@@ -924,17 +920,17 @@ document.addEventListener("DOMContentLoaded", function() {
         color: #ff4d4d;
         text-align: center;
         font-weight: 500;
-        display: none;
+        display: none; /* Скрыто по умолчанию */
         
-        /* Абсолютное позиционирование НАД кнопкой */
+        /* Позиционируем абсолютно ОТНОСИТЕЛЬНО .submit-wrapper */
         position: absolute;
-        bottom: 100%; /* Прилепить к верху контейнера кнопки */
+        bottom: 100%; /* Прилепляем к верху кнопки */
         left: 0;
         width: 100%;
-        margin-bottom: 5px; /* Отступ 5px от кнопки */
+        margin-bottom: 8px; /* Отступ от кнопки */
+        z-index: 5;
         
-        /* Шрифт для мобильных */
-        font-size: 12px;
+        font-size: 12px; /* Мобильный */
     }
 
     /* 9. КНОПКА */
@@ -947,20 +943,17 @@ document.addEventListener("DOMContentLoaded", function() {
         -webkit-tap-highlight-color: transparent;
     }
     
-    /* ПК ВЕРСИЯ (Медиа-запросы) */
+    /* ПК ВЕРСИЯ */
     @media (min-width: 769px) {
-        /* Увеличенные шрифты для ПК */
         .my-label { font-size: 18px; }
         .my-popup-subtitle { font-size: 22px; }
         .main-error-alert { font-size: 16px; }
-
-        /* Ховер только на ПК */
         .my-btn-submit:hover { background: #333; transform: translateY(-2px); }
     }
 
     /* МОБИЛЬНАЯ ВЕРСИЯ */
     @media (max-width: 768px) {
-        .my-form-grid { grid-template-columns: 1fr; gap: 25px; } /* Чуть больше gap чтобы ошибки влезали */
+        .my-form-grid { grid-template-columns: 1fr; gap: 25px; }
         .my-popup-box { padding: 30px 20px; }
         .my-popup-title { font-size: 24px; margin-top: 30px; padding: 0 10px; }
         .my-btn-submit { font-size: 14px !important; } 
@@ -982,7 +975,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <form id="my-popup-form">
             <div class="my-form-grid">
                 <!-- ЛЕВАЯ КОЛОНКА -->
-                <div style="display: flex; flex-direction: column; gap: 30px;"> <!-- Gap увеличен для места под ошибки -->
+                <div style="display: flex; flex-direction: column; gap: 30px;">
                     <div class="my-inp-group">
                         <label class="my-label">Ваше имя</label>
                         <input type="text" name="Name" class="my-inp" placeholder="Иван">
@@ -1037,9 +1030,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span>
                 </label>
 
-                <!-- Кнопка с оберткой для позиционирования ошибки -->
+                <!-- КНОПКА И ОШИБКА В ОДНОМ БЛОКЕ -->
                 <div class="full-width submit-wrapper">
-                    <!-- ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ (ТЕПЕРЬ СВЕРХУ КНОПКИ) -->
+                    <!-- Ошибка лежит ЗДЕСЬ, внутри обертки, над кнопкой -->
                     <div class="main-error-alert" id="main-error-msg">
                         Пожалуйста, проверьте правильность заполнения полей
                     </div>
