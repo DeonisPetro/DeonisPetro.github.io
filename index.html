@@ -795,7 +795,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V10: ERROR ABOVE BUTTON + GAP 17PX) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V11: ERROR BELOW BUTTON + GAP 18PX) -->
 <!-- ============================================================== -->
 
 <style>
@@ -864,7 +864,7 @@ document.addEventListener("DOMContentLoaded", function() {
     /* 6. ВЫБОР СВЯЗИ */
     .messenger-selector { 
         display: flex; flex-direction: column; width: 100%; 
-        gap: 17px; /* ИЗМЕНЕНО: Было 15px, стало 17px */
+        gap: 18px; /* ИЗМЕНЕНО: Расстояние между радиокнопками 18px */
     }
     .ms-option { position: relative; display: block; cursor: pointer; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     .ms-option input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
@@ -909,28 +909,26 @@ document.addEventListener("DOMContentLoaded", function() {
     .my-check-group.error .custom-check-box { border-color: #ff4d4d; }
     .my-check-group.error span { color: #ff4d4d; }
 
-    /* 8. ОБЕРТКА ДЛЯ КНОПКИ И ОШИБКИ */
+    /* 8. ОБЕРТКА ДЛЯ КНОПКИ (статичная) */
     .submit-wrapper {
-        position: relative; 
-        margin-top: 25px; /* Место для ошибки над кнопкой */
+        margin-top: 15px; 
     }
 
-    /* ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ */
+    /* ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ (ПОД КНОПКОЙ) */
     .main-error-alert {
         color: #ff4d4d;
         text-align: center;
         font-weight: 500;
-        display: none; /* Скрыто по умолчанию */
-        
-        /* Позиционируем абсолютно ОТНОСИТЕЛЬНО .submit-wrapper */
-        position: absolute;
-        bottom: 100%; /* Прилепляем к верху кнопки */
-        left: 0;
-        width: 100%;
-        margin-bottom: 8px; /* Отступ от кнопки */
-        z-index: 5;
-        
         font-size: 12px; /* Мобильный */
+        
+        height: 20px; /* Фиксированная высота резерва под ошибку */
+        line-height: 20px;
+        margin-top: 5px;
+        opacity: 0; /* Скрыта прозрачностью, но занимает место */
+        transition: opacity 0.2s;
+    }
+    .main-error-alert.show {
+        opacity: 1; /* Показываем */
     }
 
     /* 9. КНОПКА */
@@ -947,8 +945,11 @@ document.addEventListener("DOMContentLoaded", function() {
     @media (min-width: 769px) {
         .my-label { font-size: 18px; }
         .my-popup-subtitle { font-size: 22px; }
-        .main-error-alert { font-size: 16px; }
+        .main-error-alert { font-size: 16px; height: 24px; line-height: 24px; }
         .my-btn-submit:hover { background: #333; transform: translateY(-2px); }
+        
+        /* ИЗМЕНЕНО: Поднимаем чекбокс на 10px */
+        .my-check-group { margin-top: -10px; }
     }
 
     /* МОБИЛЬНАЯ ВЕРСИЯ */
@@ -1030,14 +1031,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span>
                 </label>
 
-                <!-- КНОПКА И ОШИБКА В ОДНОМ БЛОКЕ -->
+                <!-- КНОПКА -->
                 <div class="full-width submit-wrapper">
-                    <!-- Ошибка лежит ЗДЕСЬ, внутри обертки, над кнопкой -->
+                    <button type="submit" class="my-btn-submit">Получить расчет и план работ</button>
+                    
+                    <!-- ОШИБКА СНИЗУ (занимает место, но невидима) -->
                     <div class="main-error-alert" id="main-error-msg">
                         Пожалуйста, проверьте правильность заполнения полей
                     </div>
-                    
-                    <button type="submit" class="my-btn-submit">Получить расчет и план работ</button>
                 </div>
 
             </div>
@@ -1071,7 +1072,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Сброс ошибок
         setError(phoneInput, false);
         setError(emailInput, false);
-        mainErrorMsg.style.display = 'none';
+        mainErrorMsg.classList.remove('show'); // Скрываем ошибку
         checkbox.closest('label').classList.remove('error');
     }
     popup.addEventListener('click', (e) => { if (e.target === popup) closeMyPopup(); });
@@ -1093,7 +1094,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
-    function clearMainError() { mainErrorMsg.style.display = 'none'; }
+    function clearMainError() { mainErrorMsg.classList.remove('show'); }
     
     phoneInput.addEventListener('input', () => { setError(phoneInput, false); clearMainError(); });
     emailInput.addEventListener('input', () => { setError(emailInput, false); clearMainError(); });
@@ -1115,7 +1116,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!checkbox.checked) { checkbox.closest('label').classList.add('error'); hasError = true; }
 
         if (hasError) {
-            mainErrorMsg.style.display = 'block';
+            mainErrorMsg.classList.add('show'); // Показываем ошибку
             return;
         }
 
@@ -1149,13 +1150,13 @@ document.addEventListener("DOMContentLoaded", function() {
             if (res.ok) window.location.href = 'https://DeonisPetro.github.io/success.html';
             else { 
                 mainErrorMsg.innerText = 'Ошибка отправки. Попробуйте позже.';
-                mainErrorMsg.style.display = 'block';
+                mainErrorMsg.classList.add('show');
                 btn.innerText = originalText; btn.style.opacity = '1'; 
             }
         })
         .catch(err => {
             mainErrorMsg.innerText = 'Ошибка сети. Проверьте интернет.';
-            mainErrorMsg.style.display = 'block';
+            mainErrorMsg.classList.add('show');
             btn.innerText = originalText; btn.style.opacity = '1';
         });
     });
