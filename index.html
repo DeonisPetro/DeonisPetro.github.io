@@ -455,7 +455,7 @@ window.addEventListener('load', function() {
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V15: HARD INLINE STYLES FIX) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V13: BUTTON UP 20PX + TELEGRAM TEXT + GAP FIX) -->
 <!-- ============================================================== -->
 
 <style>
@@ -490,7 +490,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     }
     .my-popup-subtitle { 
         color: #666; text-align: center; margin-bottom: 40px; 
-        font-size: 16px; 
+        font-size: 16px; /* Мобильный */
     }
 
     /* 4. СЕТКА ФОРМЫ */
@@ -502,7 +502,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     
     .my-label { 
         display: block; font-weight: 500; margin-bottom: 8px; color: #000; 
-        font-size: 14px; 
+        font-size: 14px; /* Мобильный */
     }
     
     .my-inp {
@@ -514,7 +514,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     .my-inp.error { border-color: #ff4d4d; }
     .my-inp-textarea { height: 120px; padding-top: 15px; resize: none; }
     
-    /* ОШИБКИ ПОД ПОЛЯМИ */
+    /* ОШИБКИ ПОД ПОЛЯМИ (СТАТИЧНЫЕ) */
     .error-msg { 
         color: #ff4d4d; font-size: 12px; 
         position: absolute; bottom: -18px; left: 0;
@@ -569,28 +569,29 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     .my-check-group.error .custom-check-box { border-color: #ff4d4d; }
     .my-check-group.error span { color: #ff4d4d; }
 
-    /* 8. КНОПКА И ОШИБКА */
+    /* 8. ОБЕРТКА ДЛЯ КНОПКИ */
     .submit-wrapper {
-        /* Используем !important чтобы перебить все старое */
-        margin-top: -30px !important; 
+        margin-top: -5px; /* ИЗМЕНЕНО: Подняли кнопку на 20px (было 15px, стало -5px) */
     }
 
+    /* ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ (ПОД КНОПКОЙ) */
     .main-error-alert {
         color: #ff4d4d;
         text-align: center;
         font-weight: 500;
-        font-size: 12px; 
+        font-size: 12px; /* Мобильный */
+        
         height: 20px; 
         line-height: 1.2;
-        
-        /* Принудительно прижимаем к кнопке */
-        margin-top: -2px !important; 
-        
+        margin-top: 1px; /* ИЗМЕНЕНО: Минимальный отступ от кнопки (в 3 раза меньше чем было) */
         opacity: 0; 
         transition: opacity 0.2s;
     }
-    .main-error-alert.show { opacity: 1; }
+    .main-error-alert.show {
+        opacity: 1; 
+    }
 
+    /* 9. КНОПКА */
     .my-btn-submit {
         width: 100%; height: 60px; background: #000; color: #fff; 
         border: none; border-radius: 5px; font-size: 16px; font-weight: 600; 
@@ -609,7 +610,9 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         
         .my-check-group { margin-top: -20px; }
 
-        .messenger-selector .ms-option:nth-child(4) { top: 1px; }
+        .messenger-selector .ms-option:nth-child(4) {
+            top: 1px; 
+        }
     }
 
     /* МОБИЛЬНАЯ ВЕРСИЯ */
@@ -660,8 +663,8 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
                     <label class="my-label">Удобный способ связи</label>
                     <div class="messenger-selector">
                         <label class="ms-option">
-                            <!-- ИЗМЕНЕНО VALUE -->
-                            <input type="radio" name="Messenger" value="Telegram (Link)" checked>
+                            <input type="radio" name="Messenger" value="Telegram" checked>
+                            <!-- ИЗМЕНЕНО: Текст Telegram -->
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Telegram (укажите ссылку в комментарии)</div></div>
                         </label>
                         <label class="ms-option">
@@ -692,12 +695,12 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
                     <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span>
                 </label>
 
-                <!-- КНОПКА (Style inline для гарантии) -->
-                <div class="full-width submit-wrapper" style="margin-top: -30px !important;">
+                <!-- КНОПКА -->
+                <div class="full-width submit-wrapper">
                     <button type="submit" class="my-btn-submit">Получить расчет и план работ</button>
                     
-                    <!-- ОШИБКА (Style inline для гарантии) -->
-                    <div class="main-error-alert" id="main-error-msg" style="margin-top: -2px !important;">
+                    <!-- ОШИБКА СНИЗУ -->
+                    <div class="main-error-alert" id="main-error-msg">
                         Пожалуйста, проверьте правильность заполнения полей
                     </div>
                 </div>
@@ -733,7 +736,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Сброс ошибок
         setError(phoneInput, false);
         setError(emailInput, false);
-        mainErrorMsg.classList.remove('show'); 
+        mainErrorMsg.classList.remove('show'); // Скрываем ошибку
         checkbox.closest('label').classList.remove('error');
     }
     popup.addEventListener('click', (e) => { if (e.target === popup) closeMyPopup(); });
@@ -777,11 +780,11 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!checkbox.checked) { checkbox.closest('label').classList.add('error'); hasError = true; }
 
         if (hasError) {
-            mainErrorMsg.classList.add('show'); 
+            mainErrorMsg.classList.add('show'); // Показываем ошибку
             return;
         }
 
-        // Успех
+        // Успех: меняем кнопку на "Отправка..."
         const originalText = btn.innerText;
         btn.innerText = 'Отправка...';
         btn.style.opacity = '0.7';
