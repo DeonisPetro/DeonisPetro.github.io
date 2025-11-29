@@ -455,7 +455,7 @@ window.addEventListener('load', function() {
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V13: BUTTON UP 20PX + TELEGRAM TEXT + GAP FIX) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V16: ERROR DOWN 3PX + TELEGRAM NO WRAP + GAP FIX) -->
 <!-- ============================================================== -->
 
 <style>
@@ -514,7 +514,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     .my-inp.error { border-color: #ff4d4d; }
     .my-inp-textarea { height: 120px; padding-top: 15px; resize: none; }
     
-    /* ОШИБКИ ПОД ПОЛЯМИ (СТАТИЧНЫЕ) */
+    /* ОШИБКИ ПОД ПОЛЯМИ */
     .error-msg { 
         color: #ff4d4d; font-size: 12px; 
         position: absolute; bottom: -18px; left: 0;
@@ -524,22 +524,28 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     /* 6. ВЫБОР СВЯЗИ */
     .messenger-selector { 
         display: flex; flex-direction: column; width: 100%; 
-        gap: 18px; 
+        gap: 18px !important; /* Жестко задаем отступ 18px */
     }
     .ms-option { position: relative; display: block; cursor: pointer; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     .ms-option input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
     
     .ms-box {
         display: flex; align-items: center; justify-content: space-between;
-        height: 55px; padding: 0 20px;
+        height: 55px; 
+        padding: 0 20px; /* Стандартный паддинг */
         border: 1px solid #c9c9c9; border-radius: 5px;
-        font-size: 16px; color: #000; background: #fff; box-sizing: border-box;
+        font-size: 16px; 
+        color: #000; background: #fff; box-sizing: border-box;
+        white-space: nowrap; /* Запрещаем перенос строк */
     }
     .ms-circle {
         width: 20px; height: 20px; border: 1px solid #c9c9c9; border-radius: 50%;
         margin-right: 15px; position: relative; box-sizing: border-box; flex-shrink: 0;
     }
-    .ms-text { flex-grow: 1; }
+    .ms-text { 
+        flex-grow: 1; 
+        overflow: hidden; text-overflow: ellipsis; /* Если вдруг не влезет - троеточие */
+    }
 
     .ms-option input:checked + .ms-box { background-color: #fff; border-color: #c9c9c9; }
     .ms-option input:checked + .ms-box .ms-circle { border-color: #c9c9c9; }
@@ -569,29 +575,29 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     .my-check-group.error .custom-check-box { border-color: #ff4d4d; }
     .my-check-group.error span { color: #ff4d4d; }
 
-    /* 8. ОБЕРТКА ДЛЯ КНОПКИ */
+    /* 8. КНОПКА И ОШИБКА */
     .submit-wrapper {
-        margin-top: -5px; /* ИЗМЕНЕНО: Подняли кнопку на 20px (было 15px, стало -5px) */
+        /* Поднятие кнопки на 20px */
+        margin-top: -5px; 
+        position: relative;
     }
 
-    /* ГЛАВНОЕ СООБЩЕНИЕ ОБ ОШИБКЕ (ПОД КНОПКОЙ) */
     .main-error-alert {
         color: #ff4d4d;
         text-align: center;
         font-weight: 500;
-        font-size: 12px; /* Мобильный */
-        
+        font-size: 12px; 
         height: 20px; 
         line-height: 1.2;
-        margin-top: 1px; /* ИЗМЕНЕНО: Минимальный отступ от кнопки (в 3 раза меньше чем было) */
+        
+        /* ИЗМЕНЕНО: Опускаем ошибку на 3px ниже от кнопки (было 1px) */
+        margin-top: 4px !important; 
+        
         opacity: 0; 
         transition: opacity 0.2s;
     }
-    .main-error-alert.show {
-        opacity: 1; 
-    }
+    .main-error-alert.show { opacity: 1; }
 
-    /* 9. КНОПКА */
     .my-btn-submit {
         width: 100%; height: 60px; background: #000; color: #fff; 
         border: none; border-radius: 5px; font-size: 16px; font-weight: 600; 
@@ -610,8 +616,16 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         
         .my-check-group { margin-top: -20px; }
 
-        .messenger-selector .ms-option:nth-child(4) {
+        /* ИЗМЕНЕНО: Опускаем последнюю радиокнопку на 1px вниз */
+        .messenger-selector .ms-option:last-child {
+            position: relative;
             top: 1px; 
+        }
+        
+        /* ИЗМЕНЕНО: Уменьшаем шрифт в радиокнопках на 1px для ПК, чтобы текст влез */
+        .ms-box {
+            font-size: 15px; /* Было 16px */
+            padding: 0 15px; /* Чуть уменьшаем паддинг с боков */
         }
     }
 
@@ -623,6 +637,9 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         .my-btn-submit { font-size: 14px !important; } 
         .my-popup-subtitle { margin-top: 5px; margin-bottom: 30px; }
         
+        /* На мобильном текст Telegram может переноситься, если не влазит, или уменьшим шрифт */
+        .ms-box { white-space: normal; line-height: 1.2; font-size: 14px; }
+
         .my-check-group { font-size: 14px; line-height: 1.4; margin-top: -15px; align-items: flex-start; }
         .custom-check-box { width: 24px; height: 24px; margin-top: -2px; }
         .custom-check-box::after { left: 8px; top: 4px; width: 6px; height: 11px; }
@@ -663,8 +680,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
                     <label class="my-label">Удобный способ связи</label>
                     <div class="messenger-selector">
                         <label class="ms-option">
-                            <input type="radio" name="Messenger" value="Telegram" checked>
-                            <!-- ИЗМЕНЕНО: Текст Telegram -->
+                            <input type="radio" name="Messenger" value="Telegram (Link)" checked>
                             <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Telegram (укажите ссылку в комментарии)</div></div>
                         </label>
                         <label class="ms-option">
@@ -695,11 +711,11 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
                     <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span>
                 </label>
 
-                <!-- КНОПКА -->
-                <div class="full-width submit-wrapper">
+                <!-- КНОПКА (Inline стиль для margin-top -5px, поднятие) -->
+                <div class="full-width submit-wrapper" style="margin-top: -5px !important;">
                     <button type="submit" class="my-btn-submit">Получить расчет и план работ</button>
                     
-                    <!-- ОШИБКА СНИЗУ -->
+                    <!-- ОШИБКА (Снизу, отступ 4px) -->
                     <div class="main-error-alert" id="main-error-msg">
                         Пожалуйста, проверьте правильность заполнения полей
                     </div>
@@ -736,7 +752,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Сброс ошибок
         setError(phoneInput, false);
         setError(emailInput, false);
-        mainErrorMsg.classList.remove('show'); // Скрываем ошибку
+        mainErrorMsg.classList.remove('show'); 
         checkbox.closest('label').classList.remove('error');
     }
     popup.addEventListener('click', (e) => { if (e.target === popup) closeMyPopup(); });
@@ -780,11 +796,11 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!checkbox.checked) { checkbox.closest('label').classList.add('error'); hasError = true; }
 
         if (hasError) {
-            mainErrorMsg.classList.add('show'); // Показываем ошибку
+            mainErrorMsg.classList.add('show'); 
             return;
         }
 
-        // Успех: меняем кнопку на "Отправка..."
+        // Успех
         const originalText = btn.innerText;
         btn.innerText = 'Отправка...';
         btn.style.opacity = '0.7';
