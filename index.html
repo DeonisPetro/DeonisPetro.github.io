@@ -455,7 +455,7 @@ window.addEventListener('load', function() {
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V17: RADIO GAP 20PX) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V18: IGNORE MOBILE-MENU NAV BUTTON) -->
 <!-- ============================================================== -->
 
 <style>
@@ -524,7 +524,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     /* 6. ВЫБОР СВЯЗИ */
     .messenger-selector { 
         display: flex; flex-direction: column; width: 100%; 
-        gap: 21px !important; /* ИЗМЕНЕНО: Расстояние между кнопками 20px */
+        gap: 20px !important; 
     }
     .ms-option { position: relative; display: block; cursor: pointer; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     .ms-option input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
@@ -753,8 +753,21 @@ document.addEventListener("DOMContentLoaded", function() {
     popup.addEventListener('click', (e) => { if (e.target === popup) closeMyPopup(); });
 
     document.addEventListener('click', function(e) {
+        // Ищем ссылку-триггер
         const link = e.target.closest('a[href*="#popup:myform"]') || e.target.closest('a[href="#contact-us"]'); 
-        if (link) { e.preventDefault(); e.stopPropagation(); openMyPopup(); }
+        
+        // ИЗМЕНЕНО: Проверяем, не является ли эта кнопка элементом мобильного меню (навигации)
+        if (link && link.closest('.mobile-menu')) {
+            // Если это кнопка меню — ничего не делаем, даем сайту работать как обычно (скроллить)
+            return; 
+        }
+
+        // Если это обычная кнопка "Обсудить проект" — открываем попап
+        if (link) { 
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            openMyPopup(); 
+        }
     });
 
     // 3. ОШИБКИ
