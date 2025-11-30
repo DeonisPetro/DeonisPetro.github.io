@@ -453,4 +453,401 @@ window.addEventListener('load', function() {
   }
 });
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
-window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script> </body> </html>
+window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script> 
+<!-- ============================================================== -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (V18: IGNORE MOBILE-MENU NAV BUTTON) -->
+<!-- ============================================================== -->
+
+<style>
+    /* 1. ФОН И ОКНО */
+    .my-popup-overlay {
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 9999999;
+        justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; overflow-y: auto;
+    }
+    .my-popup-box {
+        background: #ffffff; width: 100%; max-width: 1000px; padding: 50px 60px;
+        border-radius: 8px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        font-family: 'Montserrat', Arial, sans-serif; text-align: left; margin: auto;
+        box-sizing: border-box;
+    }
+
+    /* 2. КРЕСТИК */
+    .my-popup-close {
+        position: absolute; top: 20px; right: 20px; width: 30px; height: 30px; cursor: pointer; opacity: 0.6; transition: 0.3s; z-index: 10;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .my-popup-close:hover { opacity: 1; }
+    .my-popup-close:before, .my-popup-close:after {
+        content: ''; position: absolute; top: 14px; left: 0; width: 30px; height: 2px; background: #000; transform: rotate(45deg);
+    }
+    .my-popup-close:after { transform: rotate(-45deg); }
+
+    /* 3. ЗАГОЛОВКИ */
+    .my-popup-title { 
+        font-size: 36px; font-weight: 600; color: #000; text-align: center; 
+        margin-bottom: 10px; line-height: 1.2; margin-top: 10px;
+    }
+    .my-popup-subtitle { 
+        color: #666; text-align: center; margin-bottom: 40px; 
+        font-size: 16px; /* Мобильный */
+    }
+
+    /* 4. СЕТКА ФОРМЫ */
+    .my-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+    .full-width { grid-column: 1 / -1; }
+
+    /* 5. ПОЛЯ ВВОДА */
+    .my-inp-group { position: relative; margin-bottom: 0; }
+    
+    .my-label { 
+        display: block; font-weight: 500; margin-bottom: 8px; color: #000; 
+        font-size: 14px; /* Мобильный */
+    }
+    
+    .my-inp {
+        width: 100%; height: 55px; background: transparent; border: 1px solid #c9c9c9;
+        border-radius: 5px; padding: 0 20px; font-size: 16px; color: #000; font-family: inherit;
+        box-sizing: border-box; transition: 0.3s; outline: none; appearance: none;
+    }
+    .my-inp:focus { border-color: #000; }
+    .my-inp.error { border-color: #ff4d4d; }
+    .my-inp-textarea { height: 120px; padding-top: 15px; resize: none; }
+    
+    /* ОШИБКИ ПОД ПОЛЯМИ */
+    .error-msg { 
+        color: #ff4d4d; font-size: 12px; 
+        position: absolute; bottom: -18px; left: 0;
+        display: none; 
+    }
+
+    /* 6. ВЫБОР СВЯЗИ */
+    .messenger-selector { 
+        display: flex; flex-direction: column; width: 100%; 
+        gap: 21.33px !important; 
+    }
+    .ms-option { position: relative; display: block; cursor: pointer; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    .ms-option input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+    
+    .ms-box {
+        display: flex; align-items: center; justify-content: space-between;
+        height: 55px; 
+        padding: 0 20px; 
+        border: 1px solid #c9c9c9; border-radius: 5px;
+        font-size: 16px; 
+        color: #000; background: #fff; box-sizing: border-box;
+        white-space: nowrap; 
+    }
+    .ms-circle {
+        width: 20px; height: 20px; border: 1px solid #c9c9c9; border-radius: 50%;
+        margin-right: 15px; position: relative; box-sizing: border-box; flex-shrink: 0;
+    }
+    .ms-text { 
+        flex-grow: 1; 
+        overflow: hidden; text-overflow: ellipsis; 
+    }
+
+    .ms-option input:checked + .ms-box { background-color: #fff; border-color: #c9c9c9; }
+    .ms-option input:checked + .ms-box .ms-circle { border-color: #c9c9c9; }
+    .ms-option input:checked + .ms-box .ms-circle::after {
+        content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 12px; height: 12px; background-color: #2997ff; border-radius: 50%;
+    }
+
+    /* 7. ЧЕКБОКС И СОГЛАСИЕ */
+    .my-check-group {
+        display: flex; align-items: center; 
+        font-size: 12px; color: #555; 
+        margin-top: -15px; 
+        cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .my-check-group input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+    
+    .custom-check-box {
+        width: 20px; height: 20px; border: 1px solid #000; border-radius: 4px;
+        margin-right: 12px; flex-shrink: 0; position: relative; background: transparent;
+    }
+    .custom-check-box::after {
+        content: ''; position: absolute; display: none; left: 6px; top: 2px; width: 5px; height: 10px;
+        border: solid #000; border-width: 0 2px 2px 0; transform: rotate(45deg);
+    }
+    .my-check-group input:checked ~ .custom-check-box::after { display: block; }
+    .my-check-group.error .custom-check-box { border-color: #ff4d4d; }
+    .my-check-group.error span { color: #ff4d4d; }
+
+    /* 8. КНОПКА И ОШИБКА */
+    .submit-wrapper {
+        margin-top: -5px; 
+        position: relative;
+    }
+
+    .main-error-alert {
+        color: #ff4d4d;
+        text-align: center;
+        font-weight: 500;
+        font-size: 12px; 
+        height: 20px; 
+        line-height: 1.2;
+        
+        margin-top: 4px !important; 
+        
+        opacity: 0; 
+        transition: opacity 0.2s;
+    }
+    .main-error-alert.show { opacity: 1; }
+
+    .my-btn-submit {
+        width: 100%; height: 60px; background: #000; color: #fff; 
+        border: none; border-radius: 5px; font-size: 16px; font-weight: 600; 
+        text-transform: uppercase; letter-spacing: 1px; cursor: pointer; 
+        transition: 0.2s; box-sizing: border-box; max-width: 100%;
+        display: block;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* ПК ВЕРСИЯ */
+    @media (min-width: 769px) {
+        .my-label { font-size: 18px; }
+        .my-popup-subtitle { font-size: 22px; }
+        .main-error-alert { font-size: 16px; height: auto; }
+        .my-btn-submit:hover { background: #333; transform: translateY(-2px); }
+        
+        .my-check-group { margin-top: -20px; }
+
+        .messenger-selector .ms-option:last-child {
+            position: relative;
+            top: 1px; 
+        }
+        
+        .ms-box {
+            font-size: 15px; 
+            padding: 0 15px; 
+        }
+    }
+
+    /* МОБИЛЬНАЯ ВЕРСИЯ */
+    @media (max-width: 768px) {
+        .my-form-grid { grid-template-columns: 1fr; gap: 25px; }
+        .my-popup-box { padding: 30px 20px; }
+        .my-popup-title { font-size: 24px; margin-top: 30px; padding: 0 10px; }
+        .my-btn-submit { font-size: 14px !important; } 
+        .my-popup-subtitle { margin-top: 5px; margin-bottom: 30px; }
+        
+        .ms-box { white-space: normal; line-height: 1.2; font-size: 14px; }
+
+        .my-check-group { font-size: 14px; line-height: 1.4; margin-top: -15px; align-items: flex-start; }
+        .custom-check-box { width: 24px; height: 24px; margin-top: -2px; }
+        .custom-check-box::after { left: 8px; top: 4px; width: 6px; height: 11px; }
+    }
+</style>
+
+<div id="my-custom-popup" class="my-popup-overlay">
+    <div class="my-popup-box">
+        <div class="my-popup-close" onclick="closeMyPopup()"></div>
+        
+        <div class="my-popup-title">Рассчитаем стоимость вашего проекта?</div>
+        <div class="my-popup-subtitle">Это бесплатно</div>
+
+        <form id="my-popup-form">
+            <div class="my-form-grid">
+                <!-- ЛЕВАЯ КОЛОНКА -->
+                <div style="display: flex; flex-direction: column; gap: 30px;">
+                    <div class="my-inp-group">
+                        <label class="my-label">Ваше имя</label>
+                        <input type="text" name="Name" class="my-inp" placeholder="Иван">
+                    </div>
+
+                    <div class="my-inp-group">
+                        <label class="my-label">Ваш телефон</label>
+                        <input type="tel" name="Phone" class="my-inp" placeholder="+7 (999) 000-00-00">
+                        <div class="error-msg">Введите корректный номер</div>
+                    </div>
+
+                    <div class="my-inp-group">
+                        <label class="my-label">Ваш E-mail</label>
+                        <input type="email" name="Email" class="my-inp" placeholder="mail@example.com">
+                        <div class="error-msg">Введите корректный E-mail</div>
+                    </div>
+                </div>
+
+                <!-- ПРАВАЯ КОЛОНКА -->
+                <div class="my-inp-group">
+                    <label class="my-label">Удобный способ связи</label>
+                    <div class="messenger-selector">
+                        <label class="ms-option">
+                            <input type="radio" name="Messenger" value="Telegram (Link)" checked>
+                            <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Telegram (Укажите ссылку в комментарии)</div></div>
+                        </label>
+                        <label class="ms-option">
+                            <input type="radio" name="Messenger" value="WhatsApp">
+                            <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">WhatsApp</div></div>
+                        </label>
+                        <label class="ms-option">
+                            <input type="radio" name="Messenger" value="Email">
+                            <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Почта (E-mail)</div></div>
+                        </label>
+                        <label class="ms-option">
+                            <input type="radio" name="Messenger" value="Phone">
+                            <div class="ms-box"><div class="ms-circle"></div><div class="ms-text">Телефон (Звонок)</div></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- НИЖНЯЯ ЧАСТЬ -->
+                <div class="my-inp-group full-width">
+                    <label class="my-label">Комментарий</label>
+                    <textarea name="Message" class="my-inp my-inp-textarea" placeholder="Например: написать после 18:00 в Telegram, @вашюзернейм"></textarea>
+                </div>
+
+                <!-- Чекбокс -->
+                <label class="my-check-group full-width">
+                    <input type="checkbox" id="popup-agree" checked>
+                    <div class="custom-check-box"></div>
+                    <span>Я согласен на обработку персональных данных и принимаю условия Политики конфиденциальности</span>
+                </label>
+
+                <!-- КНОПКА (Inline стиль для margin-top -5px, поднятие) -->
+                <div class="full-width submit-wrapper" style="margin-top: -5px !important;">
+                    <button type="submit" class="my-btn-submit">Получить расчет и план работ</button>
+                    
+                    <!-- ОШИБКА (Снизу, отступ 4px) -->
+                    <div class="main-error-alert" id="main-error-msg">
+                        Пожалуйста, проверьте правильность заполнения полей
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://unpkg.com/imask"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const popup = document.getElementById('my-custom-popup');
+    const form = document.getElementById('my-popup-form');
+    const phoneInput = form.querySelector('input[name="Phone"]');
+    const emailInput = form.querySelector('input[name="Email"]');
+    const checkbox = form.querySelector('#popup-agree');
+    const btn = form.querySelector('button[type="submit"]');
+    const mainErrorMsg = document.getElementById('main-error-msg');
+
+    // 1. МАСКА
+    const mask = IMask(phoneInput, { mask: '+{7} (000) 000-00-00', lazy: false });
+
+    // 2. ОТКРЫТИЕ/ЗАКРЫТИЕ
+    window.openMyPopup = function(e) {
+        if(e) e.preventDefault();
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    window.closeMyPopup = function() {
+        popup.style.display = 'none';
+        document.body.style.overflow = '';
+        // Сброс ошибок
+        setError(phoneInput, false);
+        setError(emailInput, false);
+        mainErrorMsg.classList.remove('show'); 
+        checkbox.closest('label').classList.remove('error');
+    }
+    popup.addEventListener('click', (e) => { if (e.target === popup) closeMyPopup(); });
+
+    document.addEventListener('click', function(e) {
+        // Ищем ссылку-триггер
+        const link = e.target.closest('a[href*="#popup:myform"]') || e.target.closest('a[href="#contact-us"]'); 
+        
+        // ИЗМЕНЕНО: Проверяем, не является ли эта кнопка элементом мобильного меню (навигации)
+        if (link && link.closest('.mobile-menu')) {
+            // Если это кнопка меню — ничего не делаем, даем сайту работать как обычно (скроллить)
+            return; 
+        }
+
+        // Если это обычная кнопка "Обсудить проект" — открываем попап
+        if (link) { 
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            openMyPopup(); 
+        }
+    });
+
+    // 3. ОШИБКИ
+    function setError(input, show) {
+        const msg = input.parentNode.querySelector('.error-msg');
+        if(show) {
+            input.classList.add('error');
+            if(msg) msg.style.display = 'block';
+        } else {
+            input.classList.remove('error');
+            if(msg) msg.style.display = 'none';
+        }
+    }
+    
+    function clearMainError() { mainErrorMsg.classList.remove('show'); }
+    
+    phoneInput.addEventListener('input', () => { setError(phoneInput, false); clearMainError(); });
+    emailInput.addEventListener('input', () => { setError(emailInput, false); clearMainError(); });
+    checkbox.addEventListener('change', () => { 
+        if(checkbox.checked) checkbox.closest('label').classList.remove('error'); 
+        clearMainError();
+    });
+
+    // 4. ОТПРАВКА
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let hasError = false;
+
+        if (mask.unmaskedValue.length < 11) { setError(phoneInput, true); hasError = true; }
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) { setError(emailInput, true); hasError = true; }
+
+        if (!checkbox.checked) { checkbox.closest('label').classList.add('error'); hasError = true; }
+
+        if (hasError) {
+            mainErrorMsg.classList.add('show'); // Показываем ошибку
+            return;
+        }
+
+        // Успех
+        const originalText = btn.innerText;
+        btn.innerText = 'Отправка...';
+        btn.style.opacity = '0.7';
+
+        const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
+        const TG_CHAT_ID = "-1002935952114";
+
+        const name = form.querySelector('input[name="Name"]').value || 'Не указано';
+        const phone = phoneInput.value;
+        const email = emailInput.value;
+        const mess = form.querySelector('input[name="Messenger"]:checked').value;
+        const msg = form.querySelector('textarea[name="Message"]').value || '-';
+
+        const text = `<b>🔔 ЗАЯВКА (ПОПАП)</b>\n\n` +
+                     `<b>👤 Имя:</b> ${name}\n` +
+                     `<b>📞 Тел:</b> ${phone}\n` +
+                     `<b>📧 Email:</b> ${email}\n` +
+                     `<b>💬 Связь:</b> ${mess}\n` +
+                     `<b>📝 Инфо:</b> ${msg}`;
+
+        fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TG_CHAT_ID, parse_mode: 'html', text: text })
+        })
+        .then(res => {
+            if (res.ok) window.location.href = 'https://DeonisPetro.github.io/success.html';
+            else { 
+                mainErrorMsg.innerText = 'Ошибка отправки. Попробуйте позже.';
+                mainErrorMsg.classList.add('show');
+                btn.innerText = originalText; btn.style.opacity = '1'; 
+            }
+        })
+        .catch(err => {
+            mainErrorMsg.innerText = 'Ошибка сети. Проверьте интернет.';
+            mainErrorMsg.classList.add('show');
+            btn.innerText = originalText; btn.style.opacity = '1';
+        });
+    });
+});
+</script>
+</body> </html>
