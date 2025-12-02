@@ -468,7 +468,7 @@ document.documentElement.classList.remove('js-loading');
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ВЕРСИЯ С ПРАВКАМИ #8) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ВЕРСИЯ С ПРАВКАМИ #9) -->
 <!-- ============================================================== -->
 
 <style>
@@ -562,6 +562,15 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         font-weight: 400;
     }
 
+    /* ОШИБКИ ДЛЯ TELEGRAM (общая) */
+    .error-msg-telegram {
+        color: #ff4d4d; font-size: 12px;
+        position: absolute; bottom: -18px; left: 0;
+        display: none;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 400;
+    }
+
     /* 6. ВЫБОР СПОСОБА СВЯЗИ (КНОПКИ) */
     .messenger-selector {
         display: grid;
@@ -615,6 +624,19 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         color: #FFFFFF;
     }
 
+    @media (min-width: 769px) {
+        .ms-box:hover {
+            background-color: #E6E6E6;
+            border-color: #E6E6E6;
+        }
+
+        .ms-option input:checked + .ms-box:hover {
+            background-color: #004B85;
+            border-color: #004B85;
+            color: #FFFFFF;
+        }
+    }
+
     /* 7. ПОЛЕ ДЛЯ КОНТАКТА (ДИНАМИЧЕСКОЕ) */
     .contact-field-wrapper {
         position: relative;
@@ -627,6 +649,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         grid-template-columns: 1fr 1fr;
         gap: 15px;
         display: none;
+        position: relative;
     }
 
     .contact-fields-telegram.active {
@@ -822,8 +845,9 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
                         </div>
                         <div class="my-inp-group">
                             <input type="text" id="contact-input-telegram-phone" name="ContactInfoTelegramPhone" class="my-inp" placeholder="+7 (999) 000-00-00">
-                            <div class="error-msg">Заполните хотя бы одно поле</div>
+                            <div class="error-msg">Ошибка в номере</div>
                         </div>
+                        <div class="error-msg-telegram" style="grid-column: 1 / -1; position: relative; bottom: auto; margin-top: -8px;">Заполните хотя бы одно поле</div>
                     </div>
 
                     <!-- ОДИНОЧНОЕ ПОЛЕ ДЛЯ ОСТАЛЬНЫХ -->
@@ -868,6 +892,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const contactTelegramUsername = document.getElementById('contact-input-telegram-username');
     const contactTelegramPhone = document.getElementById('contact-input-telegram-phone');
     const contactFieldsTelegram = document.querySelector('.contact-fields-telegram');
+    const errorMsgTelegram = document.querySelector('.error-msg-telegram');
     
     // Элементы для других
     const contactInput = document.getElementById('contact-input');
@@ -946,9 +971,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 placeholderChar: '_'
             });
             
+            // Устанавливаем курсор в правильную позицию при фокусе
+            contactTelegramPhone.addEventListener('focus', function() {
+                if (this.value === '' || this.value === '+7 (___) ___-__-__') {
+                    setTimeout(() => {
+                        this.setSelectionRange(1, 1);
+                    }, 0);
+                }
+            });
+            
             // Очищаем ошибки
             setError(contactTelegramUsername, false);
             setError(contactTelegramPhone, false);
+            errorMsgTelegram.style.display = 'none';
         } else {
             // Остальные: одиночное поле
             contactFieldsTelegram.classList.remove('active');
@@ -968,6 +1003,15 @@ document.addEventListener("DOMContentLoaded", function() {
                     lazy: false,
                     overwrite: true,
                     placeholderChar: '_'
+                });
+
+                // Устанавливаем курсор в правильную позицию при фокусе
+                contactInput.addEventListener('focus', function() {
+                    if (this.value === '' || this.value === '+7 (___) ___-__-__') {
+                        setTimeout(() => {
+                            this.setSelectionRange(1, 1);
+                        }, 0);
+                    }
                 });
             }
 
@@ -994,6 +1038,7 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             setError(this, false);
         }
+        errorMsgTelegram.style.display = 'none';
         clearMainError();
     });
 
@@ -1005,6 +1050,7 @@ document.addEventListener("DOMContentLoaded", function() {
             this.style.color = '#999';
         }
         setError(this, false);
+        errorMsgTelegram.style.display = 'none';
         clearMainError();
     });
 
@@ -1033,6 +1079,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setError(contactInput, false);
         setError(contactTelegramUsername, false);
         setError(contactTelegramPhone, false);
+        errorMsgTelegram.style.display = 'none';
         mainErrorMsg.classList.remove('show');
         checkbox.closest('label').classList.remove('error');
     }
@@ -1107,11 +1154,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!usernameValid && !phoneValid) {
                 if (!usernameValue && !phoneValue) {
-                    setError(contactTelegramUsername, true);
-                    setError(contactTelegramPhone, true);
+                    errorMsgTelegram.style.display = 'block';
                 }
                 return false;
             }
+            errorMsgTelegram.style.display = 'none';
             return true;
         }
 
