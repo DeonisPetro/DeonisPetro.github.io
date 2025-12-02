@@ -468,7 +468,7 @@ document.documentElement.classList.remove('js-loading');
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ФИНАЛЬНАЯ ВЕРСИЯ v8 - STYLES & DUAL ERRORS) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ФИНАЛЬНАЯ ВЕРСИЯ v9 - NO JUMPS) -->
 <!-- ============================================================== -->
 
 <style>
@@ -562,11 +562,11 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         font-weight: 400;
     }
 
-    /* ОШИБКИ ДЛЯ TELEGRAM (общая по центру) - ПОДНЯТА ВЫШЕ */
+    /* ОШИБКИ ДЛЯ TELEGRAM (общая по центру) */
     .error-msg-telegram {
         color: #ff4d4d; font-size: 12px;
         position: absolute;
-        bottom: -8px; /* Было -23px, подняли на 15px */
+        bottom: -8px; 
         left: 50%;
         transform: translateX(-50%);
         display: none;
@@ -633,7 +633,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     @media (min-width: 769px) {
         .ms-box:hover {
             background-color: #E6E6E6;
-            border-color: #000000; /* ТЕПЕРЬ БОРДЕР ЧЕРНЫЙ ПРИ НАВЕДЕНИИ */
+            border-color: #000000;
             color: #000;
         }
 
@@ -647,7 +647,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     /* 7. ПОЛЕ ДЛЯ КОНТАКТА (ДИНАМИЧЕСКОЕ) */
     .contact-field-wrapper {
         position: relative;
-        margin-bottom: 5px; /* Уменьшено с 20px, чтобы подтянуть комментарий */
+        margin-bottom: 5px;
     }
 
     /* ДВОЙНОЕ ПОЛЕ ДЛЯ TELEGRAM */
@@ -657,15 +657,17 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         gap: 15px;
         display: none;
         position: relative;
-        padding-bottom: 23px;
+        padding-bottom: 23px; /* ВАЖНО: резерв места для ошибки */
     }
 
     .contact-fields-telegram.active {
         display: grid;
     }
 
+    /* ОДИНОЧНОЕ ПОЛЕ */
     .contact-field-single {
         display: none;
+        padding-bottom: 23px; /* ВАЖНО: добавлено чтобы высота совпадала с Telegram */
     }
 
     .contact-field-single.active {
@@ -678,7 +680,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         align-items: flex-start;
         font-size: 12px; 
         color: #555;
-        margin-top: 5px; /* Уменьшено с 7px/15px для подтяжки вверх */
+        margin-top: 5px;
         margin-bottom: 15px;
         cursor: pointer; 
         -webkit-tap-highlight-color: transparent;
@@ -742,7 +744,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
             transform: none;
         }
         .my-check-group { 
-            margin-top: 5px; /* Подняли вверх */
+            margin-top: 5px;
             margin-bottom: 15px;
             font-size: 14px;
             align-items: center;
@@ -752,18 +754,16 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         }
         .ms-box { font-size: 16px; padding: 15px 12px; }
         
-        /* Расстояния между полями */
         .name-field { margin-bottom: 20px; }
         .messenger-label { margin-top: 20px; margin-bottom: 15px; }
         
         .contact-field-wrapper { 
-            margin-bottom: 5px; /* Подняли комментарий вверх */
+            margin-bottom: 5px;
         }
         .comment-field { 
-            margin-top: 5px; /* Подняли комментарий вверх */
+            margin-top: 5px;
         }
 
-        /* ПК: удаляем перенос слов */
         .contact-label-telegram {
             white-space: nowrap;
         }
@@ -818,7 +818,6 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         .contact-field-wrapper { margin-bottom: 5px; }
         .comment-field { margin-top: 5px; }
 
-        /* Мобильная версия: переносим слова */
         .contact-label-telegram {
             white-space: normal;
         }
@@ -1124,18 +1123,16 @@ document.addEventListener("DOMContentLoaded", function() {
     checkbox.addEventListener('change', () => { if(checkbox.checked) checkbox.closest('label').classList.remove('error'); clearMainError(); });
 
 
-    // === ГЛАВНАЯ ПРОВЕРКА ПЕРЕД ОТПРАВКОЙ (ПРАВКИ ПО ДВОЙНОЙ ОШИБКЕ) ===
+    // === ГЛАВНАЯ ПРОВЕРКА ПЕРЕД ОТПРАВКОЙ ===
     function validateContactField() {
         const selectedMessenger = form.querySelector('input[name="Messenger"]:checked').dataset.type;
 
-        // -------------------------------------------
-        // ЛОГИКА ТОЛЬКО ДЛЯ TELEGRAM
-        // -------------------------------------------
+        // TELEGRAM
         if (selectedMessenger === 'telegram') {
             const usernameValue = contactTelegramUsername.value.trim();
             const digitsCount = getRealDigitsCount(contactTelegramPhone.value);
             
-            // 1. Если ОБА поля пустые (только префикс 7) -> Общая ошибка
+            // 1. Если ОБА поля пустые
             if (!usernameValue && digitsCount <= 1) {
                 setError(contactTelegramUsername, false);
                 setError(contactTelegramPhone, false);
@@ -1143,11 +1140,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 return false;
             }
 
-            // Если хоть что-то заполнено, скрываем общую ошибку и проверяем каждое поле отдельно
             errorMsgTelegram.style.display = 'none';
             let isTgValid = true;
 
-            // Проверяем Username (если есть текст, должен быть @)
+            // Проверяем Username
             if (usernameValue && !usernameValue.includes('@')) {
                 setError(contactTelegramUsername, true);
                 isTgValid = false;
@@ -1155,7 +1151,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 setError(contactTelegramUsername, false);
             }
 
-            // Проверяем Phone (если есть ввод цифр, их должно быть >= 11)
+            // Проверяем Phone
             if (digitsCount > 1 && digitsCount < 11) {
                 setError(contactTelegramPhone, true);
                 isTgValid = false;
@@ -1166,9 +1162,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return isTgValid;
         }
 
-        // -------------------------------------------
-        // ЛОГИКА ДЛЯ ОБЫЧНЫХ ПОЛЕЙ
-        // -------------------------------------------
+        // ОБЫЧНЫЕ ПОЛЯ
         const value = contactInputStandard.value.trim();
 
         if (!value) {
