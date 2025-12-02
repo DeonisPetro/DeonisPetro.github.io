@@ -468,7 +468,7 @@ document.documentElement.classList.remove('js-loading');
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ВЕРСИЯ С ПРАВКАМИ #10) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ВЕРСИЯ С ПРАВКАМИ #11) -->
 <!-- ============================================================== -->
 
 <style>
@@ -565,12 +565,16 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     /* ОШИБКИ ДЛЯ TELEGRAM (общая) */
     .error-msg-telegram {
         color: #ff4d4d; font-size: 12px;
-        position: relative;
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
         display: none;
         font-family: 'Montserrat', Arial, sans-serif;
         font-weight: 400;
         text-align: center;
-        margin-top: 8px;
+        white-space: nowrap;
+        width: 100%;
     }
 
     /* 6. ВЫБОР СПОСОБА СВЯЗИ (КНОПКИ) */
@@ -652,6 +656,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         gap: 15px;
         display: none;
         position: relative;
+        padding-bottom: 25px;
     }
 
     .contact-fields-telegram.active {
@@ -847,7 +852,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
                         </div>
                         <div class="my-inp-group">
                             <input type="text" id="contact-input-telegram-phone" name="ContactInfoTelegramPhone" class="my-inp" placeholder="+7 (999) 000-00-00">
-                            <div class="error-msg">Ошибка в номере</div>
+                            <div class="error-msg">Пожалуйста, введите корректный номер</div>
                         </div>
                         <div class="error-msg-telegram">Пожалуйста, заполните одно из полей</div>
                     </div>
@@ -976,12 +981,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 placeholderChar: '_'
             });
             
-            // Устанавливаем курсор в правильную позицию при фокусе (без скачков)
-            contactTelegramPhone.addEventListener('focus', function() {
-                setTimeout(() => {
-                    this.setSelectionRange(1, 1);
-                }, 0);
-            }, { once: false });
+            // Обработчик фокуса для правильной позиции курсора
+            contactTelegramPhone.addEventListener('focus', handlePhoneFocus);
             
             // Очищаем ошибки
             setError(contactTelegramUsername, false);
@@ -1015,16 +1016,33 @@ document.addEventListener("DOMContentLoaded", function() {
                     placeholderChar: '_'
                 });
 
-                // Устанавливаем курсор в правильную позицию при фокусе (без скачков)
-                contactInput.addEventListener('focus', function() {
-                    setTimeout(() => {
-                        this.setSelectionRange(1, 1);
-                    }, 0);
-                }, { once: false });
+                // Обработчик фокуса для правильной позиции курсора
+                contactInput.addEventListener('focus', handlePhoneFocus);
             }
 
             setError(contactInput, false);
         }
+    }
+
+    // Функция для правильной позиции курсора при фокусе на телефон
+    function handlePhoneFocus(e) {
+        const input = e.target;
+        // Находим первый символ, который не является частью маски (+7 (  )  -  -)
+        let cursorPos = 1; // Начало после +
+        
+        if (input.value.length > 1) {
+            // Если есть введенные данные, ставим курсор в конец реальных данных
+            for (let i = input.value.length - 1; i >= 0; i--) {
+                if (input.value[i] !== '_' && input.value[i] !== ' ' && input.value[i] !== '(' && input.value[i] !== ')' && input.value[i] !== '-') {
+                    cursorPos = i + 1;
+                    break;
+                }
+            }
+        }
+        
+        setTimeout(() => {
+            input.setSelectionRange(cursorPos, cursorPos);
+        }, 0);
     }
 
     // СЛУШАТЕЛЬ НА СМЕНУ СПОСОБА СВЯЗИ
