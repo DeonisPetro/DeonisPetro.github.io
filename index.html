@@ -468,7 +468,7 @@ document.documentElement.classList.remove('js-loading');
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ПЕРЕДЕЛАННАЯ ВЕРСИЯ) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ВЕРСИЯ С ПРАВКАМИ) -->
 <!-- ============================================================== -->
 
 <style>
@@ -525,7 +525,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     }
     .my-inp:focus { border-color: #000; }
     .my-inp.error { border-color: #ff4d4d; }
-    .my-inp-textarea { height: 120px; padding-top: 15px; resize: none; }
+    .my-inp-textarea { height: 100px; padding-top: 15px; resize: none; }
    
     /* ОШИБКИ ПОД ПОЛЯМИ */
     .error-msg {
@@ -593,16 +593,21 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
 
     /* 8. ЧЕКБОКС И СОГЛАСИЕ */
     .my-check-group {
-        display: flex; align-items: center;
-        font-size: 12px; color: #555;
-        margin-top: -15px;
-        cursor: pointer; -webkit-tap-highlight-color: transparent;
+        display: flex; 
+        align-items: flex-start;
+        font-size: 12px; 
+        color: #555;
+        margin-top: 7px;
+        margin-bottom: 15px;
+        cursor: pointer; 
+        -webkit-tap-highlight-color: transparent;
     }
     .my-check-group input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
    
     .custom-check-box {
         width: 20px; height: 20px; border: 1px solid #000; border-radius: 4px;
         margin-right: 12px; flex-shrink: 0; position: relative; background: transparent;
+        margin-top: 2px;
     }
     .custom-check-box::after {
         content: ''; position: absolute; display: none; left: 6px; top: 2px; width: 5px; height: 10px;
@@ -614,7 +619,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
 
     /* 9. КНОПКА И ОШИБКА */
     .submit-wrapper {
-        margin-top: -5px;
+        margin-top: 0;
         position: relative;
     }
 
@@ -638,6 +643,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         transition: 0.2s; box-sizing: border-box; max-width: 100%;
         display: block;
         -webkit-tap-highlight-color: transparent;
+        margin-top: 15px;
     }
 
     /* ПК ВЕРСИЯ */
@@ -646,7 +652,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         .my-popup-subtitle { font-size: 22px; margin-bottom: 15px; }
         .main-error-alert { font-size: 16px; height: auto; }
         .my-btn-submit:hover { background: #333; transform: translateY(-2px); }
-        .my-check-group { margin-top: -20px; }
+        .my-check-group { margin-top: 7px; margin-bottom: 15px; }
         .ms-box { font-size: 15px; padding: 15px 12px; }
         
         /* Расстояния между полями */
@@ -677,8 +683,8 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
             padding: 12px;
         }
 
-        .my-check-group { font-size: 14px; line-height: 1.4; margin-top: -15px; align-items: flex-start; }
-        .custom-check-box { width: 24px; height: 24px; margin-top: -2px; }
+        .my-check-group { font-size: 14px; line-height: 1.4; margin-top: 7px; margin-bottom: 15px; align-items: flex-start; }
+        .custom-check-box { width: 24px; height: 24px; margin-top: 0px; }
         .custom-check-box::after { left: 8px; top: 4px; width: 6px; height: 11px; }
 
         .name-field { margin-bottom: 15px; }
@@ -745,7 +751,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
                 </label>
 
                 <!-- КНОПКА -->
-                <div class="full-width submit-wrapper" style="margin-top: -5px !important;">
+                <div class="full-width submit-wrapper">
                     <button type="submit" class="my-btn-submit">Получить расчет и план работ</button>
                     <div class="main-error-alert" id="main-error-msg">
                         Пожалуйста, проверьте правильность заполнения полей
