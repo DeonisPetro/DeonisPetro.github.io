@@ -468,7 +468,7 @@ document.documentElement.classList.remove('js-loading');
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ВЕРСИЯ С ПРАВКАМИ #5) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ВЕРСИЯ С ПРАВКАМИ #6) -->
 <!-- ============================================================== -->
 
 <style>
@@ -519,11 +519,13 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         display: block; font-weight: 400; margin-bottom: 8px; color: #000;
         font-size: 14px;
         font-family: 'Montserrat', Arial, sans-serif;
+        white-space: normal;
+        word-break: break-word;
     }
    
     .my-inp {
         width: 100%; height: 55px; background: transparent; border: 1px solid #c9c9c9;
-        border-radius: 5px; padding: 0 20px; font-size: 16px; color: #000; 
+        border-radius: 5px; padding: 0 20px; font-size: 16px; color: #999; 
         font-family: 'Montserrat', Arial, sans-serif;
         box-sizing: border-box; transition: 0.3s; outline: none; appearance: none;
         font-weight: 400;
@@ -786,7 +788,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
 
                 <!-- ДИНАМИЧЕСКОЕ ПОЛЕ ДЛЯ КОНТАКТА -->
                 <div class="contact-field-wrapper">
-                    <label class="my-label" id="contact-label">Укажите ссылку или номер телефона (Если привязан к Telegram)</label>
+                    <label class="my-label" id="contact-label">Укажите ссылку или номер&nbsp;телефона<br>(Если привязан к Telegram)</label>
                     <input type="text" id="contact-input" name="ContactInfo" class="my-inp" placeholder="Укажите ссылку или номер телефона (Если привязан к Telegram)">
                     <div class="error-msg">Это поле обязательно</div>
                 </div>
@@ -833,12 +835,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // ТИПЫ КОНТАКТ-ПОЛЕЙ
     const contactTypes = {
         telegram: {
-            label: 'Укажите ссылку или номер телефона (Если привязан к Telegram)',
+            label: 'Укажите ссылку или номер&nbsp;телефона<br>(Если привязан к Telegram)',
             placeholder: 'https://t.me/username или +7 (999) 000-00-00',
             mask: null
         },
         whatsapp: {
-            label: 'WhatsApp (номер телефона)',
+            label: 'WhatsApp (номер&nbsp;телефона)',
             placeholder: '+7 (999) 000-00-00',
             mask: '+{7} (000) 000-00-00'
         },
@@ -864,10 +866,13 @@ document.addEventListener("DOMContentLoaded", function() {
             currentContactMask = null;
         }
 
-        contactLabel.innerText = config.label;
+        contactLabel.innerHTML = config.label;
         contactInput.placeholder = config.placeholder;
         contactInput.value = '';
         contactInput.type = type === 'email' ? 'email' : 'text';
+        
+        // СРАЗУ устанавливаем серый цвет
+        contactInput.style.color = '#999';
         
         // Применяем новую маску если есть
         if (config.mask) {
@@ -877,23 +882,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 overwrite: true,
                 placeholderChar: '_'
             });
-            
-            // Устанавливаем серый цвет для видимого placeholder'а маски
-            contactInput.style.color = '#999';
-            contactInput.addEventListener('focus', function() {
-                if (this.value === '') {
-                    this.style.color = '#999';
-                }
-            });
-            contactInput.addEventListener('input', function() {
-                if (this.value.trim() === '' || /^[\+\(\)\s\-_]+$/.test(this.value)) {
-                    this.style.color = '#999';
-                } else {
-                    this.style.color = '#000';
-                }
-            });
-        } else {
-            contactInput.style.color = '#000';
         }
 
         // Убираем ошибку при смене типа
@@ -910,6 +898,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Инициализируем первый тип (Telegram)
     updateContactField('telegram');
+
+    // СЛУШАТЕЛЬ НА ВВОД - меняем цвет с серого на черный только когда вводим реальные данные
+    contactInput.addEventListener('input', function() {
+        if (this.value && !/^[\+\(\)\s\-_]+$/.test(this.value)) {
+            this.style.color = '#000';
+        } else {
+            this.style.color = '#999';
+        }
+        setError(this, false);
+        clearMainError();
+    });
 
     // ОТКРЫТИЕ/ЗАКРЫТИЕ
     window.openMyPopup = function(e) {
@@ -957,7 +956,6 @@ document.addEventListener("DOMContentLoaded", function() {
    
     function clearMainError() { mainErrorMsg.classList.remove('show'); }
    
-    contactInput.addEventListener('input', () => { setError(contactInput, false); clearMainError(); });
     checkbox.addEventListener('change', () => {
         if(checkbox.checked) checkbox.closest('label').classList.remove('error');
         clearMainError();
