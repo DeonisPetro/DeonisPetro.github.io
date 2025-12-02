@@ -36,5 +36,13 @@
         <!-- ЖЕСТКАЯ ПРЯМАЯ ССЫЛКА -->
         <a href="https://devalliance.ru/">Вернуться на сайт</a>
     </div>
+    
+    <!-- ВОТ ТУТ ВСТАВЛЕНА ЗАЩИТА ОТ ОБНОВЛЕНИЯ -->
+    <script>
+        if (!sessionStorage.getItem('goalSent')) {
+            ym(105007692, 'reachGoal', 'formSubmit');
+            sessionStorage.setItem('goalSent', 'true');
+        }
+    </script>
 </body>
 </html>
