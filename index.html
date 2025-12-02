@@ -468,7 +468,7 @@ document.documentElement.classList.remove('js-loading');
 </script> <!-- nominify end --> </div> </div> </div> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="14780356#77559186"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="images/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 105007692 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='105007692';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/105007692" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
 window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'504c1d94a9c3aa746ca768a099b5348d','script','js/tilda-stat-1.0.min.js');},2000);</script>
 <!-- ============================================================== -->
-<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ФИНАЛЬНАЯ ВЕРСИЯ v10 - NO MOBILE BLINK) -->
+<!-- НОВЫЙ КАСТОМНЫЙ ПОПАП (ФИНАЛЬНАЯ ВЕРСИЯ v11 - NO CURSOR JUMP) -->
 <!-- ============================================================== -->
 
 <style>
@@ -531,7 +531,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         font-weight: 400;
         letter-spacing: 0.5px;
         
-        /* --- ИСПРАВЛЕНИЕ МИГАНИЯ НА МОБИЛЬНЫХ --- */
+        /* Фикс мигания на мобильных */
         -webkit-tap-highlight-color: transparent; 
         box-shadow: none; 
     }
@@ -542,8 +542,6 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     }
     .my-inp:focus { 
         border-color: #000;
-        
-        /* --- ДОПОЛНИТЕЛЬНАЯ СТРАХОВКА --- */
         outline: none;
         box-shadow: none; 
     }
@@ -557,8 +555,6 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         font-weight: 400;
         color: #000;
         letter-spacing: 0.5px;
-        
-        /* --- ИСПРАВЛЕНИЕ МИГАНИЯ ДЛЯ TEXTAREA --- */
         -webkit-tap-highlight-color: transparent;
     }
     .my-inp-textarea::placeholder {
@@ -576,7 +572,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         font-weight: 400;
     }
 
-    /* ОШИБКИ ДЛЯ TELEGRAM (общая по центру) */
+    /* ОШИБКИ ДЛЯ TELEGRAM */
     .error-msg-telegram {
         color: #ff4d4d; font-size: 12px;
         position: absolute;
@@ -591,7 +587,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         width: auto;
     }
 
-    /* 6. ВЫБОР СПОСОБА СВЯЗИ (КНОПКИ) */
+    /* 6. ВЫБОР СПОСОБА СВЯЗИ */
     .messenger-selector {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -658,7 +654,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         }
     }
 
-    /* 7. ПОЛЕ ДЛЯ КОНТАКТА (ДИНАМИЧЕСКОЕ) */
+    /* 7. ПОЛЕ ДЛЯ КОНТАКТА */
     .contact-field-wrapper {
         position: relative;
         margin-bottom: 5px;
@@ -671,7 +667,7 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
         gap: 15px;
         display: none;
         position: relative;
-        padding-bottom: 23px; /* ВАЖНО: резерв места для ошибки */
+        padding-bottom: 23px;
     }
 
     .contact-fields-telegram.active {
@@ -681,14 +677,14 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
     /* ОДИНОЧНОЕ ПОЛЕ */
     .contact-field-single {
         display: none;
-        padding-bottom: 23px; /* ВАЖНО: добавлено чтобы высота совпадала с Telegram */
+        padding-bottom: 23px;
     }
 
     .contact-field-single.active {
         display: block;
     }
 
-    /* 8. ЧЕКБОКС И СОГЛАСИЕ */
+    /* 8. ЧЕКБОКС */
     .my-check-group {
         display: flex; 
         align-items: flex-start;
@@ -878,21 +874,20 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
                 <div class="contact-field-wrapper">
                     <label class="my-label contact-label-telegram" id="contact-label">Укажите ссылку или номер телефона (Если привязан к Telegram)</label>
 
-                    <!-- ДВОЙНОЕ ПОЛЕ ДЛЯ TELEGRAM (ID уникальные) -->
+                    <!-- ДВОЙНОЕ ПОЛЕ ДЛЯ TELEGRAM -->
                     <div class="contact-fields-telegram active">
                         <div class="my-inp-group">
                             <input type="text" id="contact-input-telegram-username" name="ContactInfoTelegramUsername" class="my-inp" placeholder="@username">
                             <div class="error-msg">Пожалуйста, введите корректный юзернейм с @</div>
                         </div>
                         <div class="my-inp-group">
-                            <!-- ВАЖНО: У этого поля свой ID -->
                             <input type="text" id="contact-input-telegram-phone" name="ContactInfoTelegramPhone" class="my-inp" placeholder="+7 (999) 000-00-00">
                             <div class="error-msg">Пожалуйста, введите корректный номер</div>
                         </div>
                         <div class="error-msg-telegram">Пожалуйста, заполните одно из полей</div>
                     </div>
 
-                    <!-- ОДИНОЧНОЕ ПОЛЕ ДЛЯ WhatsApp, Phone, Email (ID уникальный) -->
+                    <!-- ОДИНОЧНОЕ ПОЛЕ -->
                     <div class="contact-field-single">
                         <input type="text" id="contact-input" name="ContactInfo" class="my-inp" placeholder="Укажите ссылку или номер телефона (Если привязан к Telegram)">
                         <div class="error-msg" id="contact-error-single">Это поле обязательно</div>
@@ -930,13 +925,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const popup = document.getElementById('my-custom-popup');
     const form = document.getElementById('my-popup-form');
     
-    // === ЭЛЕМЕНТЫ ДЛЯ TELEGRAM ===
     const contactTelegramUsername = document.getElementById('contact-input-telegram-username');
     const contactTelegramPhone = document.getElementById('contact-input-telegram-phone'); 
     const contactFieldsTelegram = document.querySelector('.contact-fields-telegram');
     const errorMsgTelegram = document.querySelector('.error-msg-telegram');
     
-    // === ЭЛЕМЕНТЫ ДЛЯ ОБЫЧНЫХ ПОЛЕЙ ===
     const contactInputStandard = document.getElementById('contact-input'); 
     const contactFieldSingle = document.querySelector('.contact-field-single');
     const contactLabel = document.getElementById('contact-label');
@@ -952,37 +945,39 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentType = 'telegram';
 
     const contactTypes = {
-        telegram: {
-            label: 'Укажите ссылку или номер телефона (Если привязан к Telegram)',
-            isTelegram: true
-        },
-        whatsapp: {
-            label: 'WhatsApp (номер&nbsp;телефона)',
-            placeholder: '+7 (999) 000-00-00',
-            mask: '+{7} (000) 000-00-00',
-            isTelegram: false
-        },
-        email: {
-            label: 'Ваш E-mail',
-            placeholder: 'mail@example.com',
-            mask: null,
-            isTelegram: false
-        },
-        phone: {
-            label: 'Ваш телефон',
-            placeholder: '+7 (999) 000-00-00',
-            mask: '+{7} (000) 000-00-00',
-            isTelegram: false
-        }
+        telegram: { label: 'Укажите ссылку или номер телефона (Если привязан к Telegram)', isTelegram: true },
+        whatsapp: { label: 'WhatsApp (номер&nbsp;телефона)', placeholder: '+7 (999) 000-00-00', mask: '+{7} (000) 000-00-00', isTelegram: false },
+        email: { label: 'Ваш E-mail', placeholder: 'mail@example.com', mask: null, isTelegram: false },
+        phone: { label: 'Ваш телефон', placeholder: '+7 (999) 000-00-00', mask: '+{7} (000) 000-00-00', isTelegram: false }
     };
 
-    // ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ: Сколько реальных цифр в поле?
     function getRealDigitsCount(value) {
         if (!value) return 0;
         return value.replace(/\D/g, '').length;
     }
 
-    // ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ПОЛЕЙ
+    // ОБНОВЛЕННАЯ ФУНКЦИЯ ФОКУСА (УБИРАЕТ МИГАНИЕ КУРСОРА)
+    function handlePhoneFocus(e) {
+        const input = e.target;
+        const value = input.value;
+        
+        // Ищем позицию первого плейсхолдера (начала свободного места)
+        let cursorPos = value.indexOf('_');
+        
+        // Если плейсхолдеров нет (поле полное) или пустое - ставим в конец
+        if (cursorPos === -1) {
+            cursorPos = value.length;
+        }
+
+        // Устанавливаем курсор
+        input.setSelectionRange(cursorPos, cursorPos);
+
+        // Дублируем через микро-задержку 0ms (вместо RAF), чтобы перебить нативный клик браузера
+        setTimeout(() => {
+            input.setSelectionRange(cursorPos, cursorPos);
+        }, 0);
+    }
+
     function updateContactField(type) {
         const config = contactTypes[type];
         currentType = type;
@@ -993,7 +988,9 @@ document.addEventListener("DOMContentLoaded", function() {
         contactLabel.innerHTML = config.label;
         contactLabel.className = config.isTelegram ? 'my-label contact-label-telegram' : 'my-label';
 
-        // === TELEGRAM ===
+        // Убираем слушатели со старых полей, чтобы не дублировать (опционально, но полезно)
+        // В данном простом случае просто переназначаем маски и слушатели
+
         if (config.isTelegram) {
             contactFieldsTelegram.classList.add('active');
             contactFieldSingle.classList.remove('active');
@@ -1003,7 +1000,6 @@ document.addEventListener("DOMContentLoaded", function() {
             contactTelegramUsername.style.color = '#999';
             contactTelegramPhone.style.color = '#999';
             
-            // Маска для Telegram
             telegramPhoneMask = IMask(contactTelegramPhone, { 
                 mask: '+{7} (000) 000-00-00', 
                 lazy: false,
@@ -1011,13 +1007,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 placeholderChar: '_'
             });
             
+            // ВАЖНО: Слушаем click и focus для мгновенной установки курсора
             contactTelegramPhone.addEventListener('focus', handlePhoneFocus);
+            contactTelegramPhone.addEventListener('click', handlePhoneFocus);
             
             setError(contactTelegramUsername, false);
             setError(contactTelegramPhone, false);
             errorMsgTelegram.style.display = 'none';
 
-        // === ОБЫЧНЫЕ ПОЛЯ ===
         } else {
             contactFieldsTelegram.classList.remove('active');
             contactFieldSingle.classList.add('active');
@@ -1037,24 +1034,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     overwrite: true,
                     placeholderChar: '_'
                 });
+                // ВАЖНО: Слушаем click и focus
                 contactInputStandard.addEventListener('focus', handlePhoneFocus);
+                contactInputStandard.addEventListener('click', handlePhoneFocus);
             }
             setError(contactInputStandard, false);
         }
-    }
-
-    function handlePhoneFocus(e) {
-        const input = e.target;
-        let cursorPos = 1;
-        if (input.value.length > 1) {
-            for (let i = input.value.length - 1; i >= 0; i--) {
-                if (input.value[i] !== '_' && input.value[i] !== ' ' && input.value[i] !== '(' && input.value[i] !== ')' && input.value[i] !== '-') {
-                    cursorPos = i + 1;
-                    break;
-                }
-            }
-        }
-        requestAnimationFrame(() => { input.setSelectionRange(cursorPos, cursorPos); });
     }
 
     messengerRadios.forEach(radio => {
@@ -1063,10 +1048,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Старт
     updateContactField('telegram');
 
-    // === ВАЛИДАЦИЯ ПРИ ВВОДЕ: TELEGRAM USERNAME ===
+    // ВАЛИДАЦИЯ
     contactTelegramUsername.addEventListener('input', function() {
         if (this.value && !this.value.includes('@')) setError(this, true);
         else setError(this, false);
@@ -1074,23 +1058,18 @@ document.addEventListener("DOMContentLoaded", function() {
         clearMainError();
     });
 
-    // === ВАЛИДАЦИЯ ПРИ ВВОДЕ: TELEGRAM PHONE ===
     contactTelegramPhone.addEventListener('input', function() {
         if (this.value && !/^[\+\(\)\s\-_]+$/.test(this.value)) this.style.color = '#000';
         else this.style.color = '#999';
         
         const digitsCount = getRealDigitsCount(this.value);
+        if (digitsCount > 1 && digitsCount < 11) setError(this, true);
+        else setError(this, false);
         
-        if (digitsCount > 1 && digitsCount < 11) {
-            setError(this, true);
-        } else {
-            setError(this, false);
-        }
         errorMsgTelegram.style.display = 'none'; 
         clearMainError();
     });
 
-    // === ВАЛИДАЦИЯ ПРИ ВВОДЕ: ОБЫЧНЫЕ ПОЛЯ ===
     contactInputStandard.addEventListener('input', function() {
         if (this.value && !/^[\+\(\)\s\-_@.]+$/.test(this.value)) this.style.color = '#000';
         else this.style.color = '#999';
@@ -1098,7 +1077,6 @@ document.addEventListener("DOMContentLoaded", function() {
         clearMainError();
     });
 
-    // УПРАВЛЕНИЕ ПОПАПОМ
     window.openMyPopup = function(e) {
         if(e) e.preventDefault();
         popup.style.display = 'flex';
@@ -1136,110 +1114,69 @@ document.addEventListener("DOMContentLoaded", function() {
     function clearMainError() { mainErrorMsg.classList.remove('show'); }
     checkbox.addEventListener('change', () => { if(checkbox.checked) checkbox.closest('label').classList.remove('error'); clearMainError(); });
 
-
-    // === ГЛАВНАЯ ПРОВЕРКА ПЕРЕД ОТПРАВКОЙ ===
     function validateContactField() {
         const selectedMessenger = form.querySelector('input[name="Messenger"]:checked').dataset.type;
 
-        // TELEGRAM
         if (selectedMessenger === 'telegram') {
             const usernameValue = contactTelegramUsername.value.trim();
             const digitsCount = getRealDigitsCount(contactTelegramPhone.value);
             
-            // 1. Если ОБА поля пустые
             if (!usernameValue && digitsCount <= 1) {
                 setError(contactTelegramUsername, false);
                 setError(contactTelegramPhone, false);
                 errorMsgTelegram.style.display = 'block'; 
                 return false;
             }
-
             errorMsgTelegram.style.display = 'none';
             let isTgValid = true;
-
-            // Проверяем Username
             if (usernameValue && !usernameValue.includes('@')) {
                 setError(contactTelegramUsername, true);
                 isTgValid = false;
-            } else {
-                setError(contactTelegramUsername, false);
-            }
-
-            // Проверяем Phone
+            } else setError(contactTelegramUsername, false);
+            
             if (digitsCount > 1 && digitsCount < 11) {
                 setError(contactTelegramPhone, true);
                 isTgValid = false;
-            } else {
-                setError(contactTelegramPhone, false);
-            }
-
+            } else setError(contactTelegramPhone, false);
             return isTgValid;
         }
 
-        // ОБЫЧНЫЕ ПОЛЯ
         const value = contactInputStandard.value.trim();
-
-        if (!value) {
-            setError(contactInputStandard, true);
-            return false;
-        }
-
+        if (!value) { setError(contactInputStandard, true); return false; }
         if (selectedMessenger === 'whatsapp' || selectedMessenger === 'phone') {
             const unmaskedValue = currentContactMask ? currentContactMask.unmaskedValue : value;
-            if (unmaskedValue.length < 11) {
-                setError(contactInputStandard, true);
-                return false;
-            }
+            if (unmaskedValue.length < 11) { setError(contactInputStandard, true); return false; }
         } else if (selectedMessenger === 'email') {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                setError(contactInputStandard, true);
-                return false;
-            }
+            if (!emailRegex.test(value)) { setError(contactInputStandard, true); return false; }
         }
-
         setError(contactInputStandard, false);
         return true;
     }
 
-    // ОТПРАВКА
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         let hasError = false;
-
         if (!validateContactField()) hasError = true;
         if (!checkbox.checked) { checkbox.closest('label').classList.add('error'); hasError = true; }
-
         if (hasError) { mainErrorMsg.classList.add('show'); return; }
 
         const originalText = btn.innerText;
         btn.innerText = 'Отправка...';
         btn.style.opacity = '0.7';
-
         const TG_TOKEN = "8358309672:AAF9NQJxka6yXkEGn7UO0UbJmSk9u6-Hj-c";
         const TG_CHAT_ID = "-1002935952114";
-
         const name = form.querySelector('input[name="Name"]').value || 'Не указано';
         const messenger = form.querySelector('input[name="Messenger"]:checked').value;
-        
         let contact = '';
         const selectedType = form.querySelector('input[name="Messenger"]:checked').dataset.type;
-        
         if (selectedType === 'telegram') {
             const username = contactTelegramUsername.value || '-';
             const phone = contactTelegramPhone.value || '-';
             contact = `Username: ${username}, Phone: ${phone}`;
-        } else {
-            contact = contactInputStandard.value;
-        }
-        
+        } else contact = contactInputStandard.value;
         const msg = form.querySelector('textarea[name="Message"]').value || '-';
-
-        const text = `<b>🔔 ЗАЯВКА (ПОПАП)</b>\n\n` +
-                     `<b>👤 Имя:</b> ${name}\n` +
-                     `<b>💬 Способ связи:</b> ${messenger}\n` +
-                     `<b>📍 Контакт:</b> ${contact}\n` +
-                     `<b>📝 Комментарий:</b> ${msg}`;
+        const text = `<b>🔔 ЗАЯВКА (ПОПАП)</b>\n\n<b>👤 Имя:</b> ${name}\n<b>💬 Способ связи:</b> ${messenger}\n<b>📍 Контакт:</b> ${contact}\n<b>📝 Комментарий:</b> ${msg}`;
 
         fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
             method: 'POST',
